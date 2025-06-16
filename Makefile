@@ -6,7 +6,7 @@
 #    By: ep <ep@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 02:58:34 by erpascua          #+#    #+#              #
-#    Updated: 2025/06/17 01:14:00 by ep               ###   ########.fr        #
+#    Updated: 2025/06/17 01:29:09 by ep               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,18 +36,20 @@ OBJ			=	$(SRC:.c=.o) $(LIBFT_OBJ)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_A)
-	$(CC) $(OBJ) $(CFLAGS) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(OBJ) $(CFLAGS) $(LDFLAGS) -o $(NAME)
 
 $(LIBFT_A): $(LIBFT_OBJ)
-	ar rcs $@ $^
+	@ar rcs $@ $^
 
 clean:
-	$(RM) $(OBJ)
-	$(RM) $(LIBFT_OBJ)
+	@$(RM) $(OBJ)
+	@$(RM) $(LIBFT_OBJ)
+	@echo "CLEAN applied : object files deleted"
 
 fclean: clean
-	$(RM) $(NAME)
-	$(RM) $(LIBFT_A)
+	@$(RM) $(NAME)
+	@$(RM) $(LIBFT_A)
+	@echo "FCLEAN applied : all binaries deleted"
 
 re: fclean all
 
