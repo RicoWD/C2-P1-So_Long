@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/16 13:26:54 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:37:29 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 #  include <X11/keysym.h>
 #  define KEY_ESC XK_Escape
 # endif
+
+# define W 119
+# define S 115
+# define A 100
+# define D 97
+# define UP_ARROW 65362
+# define DOWN_ARROW 65364
+# define LEFT_ARROW 65361
+# define RIGHT_ARROW 65363
 
 typedef struct	s_data
 {
