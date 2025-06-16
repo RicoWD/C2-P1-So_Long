@@ -1,0 +1,40 @@
+###############################################################################
+# 42 – so_long : ignorer tout ce qui est interdit ou recréé par le Makefile   #
+###############################################################################
+
+#–– Binaires et bibliothèques produites –––––––––––––––––––––––––––––––––––––#
+*.o                # objets
+*.a                # archives statiques (libft.a, libmlx.a…)
+so_long            # exécutable final (ou tout binaire éponyme)
+a.out              # exécutables par défaut
+*.out              # éventuels tests
+
+#–– Dépôts de traces / debug ––––––––––––––––––––––––––––––––––––––––––––––––#
+core               # dump noyau
+vgcore.*           # core dump Valgrind
+gmon.out           # profilage gprof
+*.log              # journaux divers
+
+#–– Fichiers système & métadonnées ––––––––––––––––––––––––––––––––––––––––––#
+.DS_Store          # macOS Finder
+Thumbs.db          # Windows Explorer
+Icon?              # macOS ressources
+
+#–– Outils d’IDE ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––#
+.vscode/
+.idea/
+*.swp
+*~                # backups Emacs, nano, etc.
+
+#–– Répertoires de build éventuels ––––––––––––––––––––––––––––––––––––––––––#
+obj/
+build/
+bin/
+
+#–– Artefacts MiniLibX ––––––––––––––––––––––––––––––––––––––––––––––––––––––#
+minilibx-linux/libmlx.a
+minilibx-linux/*.o
+minilibx-linux/*.out
+
+#–– Tests internes MiniLibX (facultatif) –––––––––––––––––––––––––––––––––––#
+minilibx-linux/test/
