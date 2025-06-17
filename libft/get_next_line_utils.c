@@ -3,59 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ep <ep@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 18:14:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/17 00:37:37 by ep               ###   ########.fr       */
+/*   Updated: 2025/06/17 11:22:36 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	l;
+// size_t	ft_strlen(const char *s)
+// {
+// 	size_t	l;
 
-	l = 0;
-	if (!s)
-		return (0);
-	while (s[l])
-		l++;
-	return (l);
-}
+// 	l = 0;
+// 	if (!s)
+// 		return (0);
+// 	while (s[l])
+// 		l++;
+// 	return (l);
+// }
 
-char	*ft_strchr(const char *s, int c)
-{
-	if (!s)
-		return (NULL);
-	while (*s && *s != (char) c)
-		s++;
-	if (*s == (char) c)
-		return ((char *)s);
-	return (NULL);
-}
+// char	*ft_strchr(const char *s, int c)
+// {
+// 	if (!s)
+// 		return (NULL);
+// 	while (*s && *s != (char) c)
+// 		s++;
+// 	if (*s == (char) c)
+// 		return ((char *)s);
+// 	return (NULL);
+// }
 
-char	*ft_strdup(const char *s)
-{
-	char	*dup;
-	size_t	i;
-	size_t	len_s;
+// char	*ft_strdup(const char *s)
+// {
+// 	char	*dup;
+// 	size_t	i;
+// 	size_t	len_s;
 
-	if (!s)
-		return (NULL);
-	len_s = ft_strlen(s);
-	dup = (char *) malloc ((len_s + 1));
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (i < len_s)
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
+// 	if (!s)
+// 		return (NULL);
+// 	len_s = ft_strlen(s);
+// 	dup = (char *) malloc ((len_s + 1));
+// 	if (!dup)
+// 		return (NULL);
+// 	i = 0;
+// 	while (i < len_s)
+// 	{
+// 		dup[i] = s[i];
+// 		i++;
+// 	}
+// 	dup[i] = '\0';
+// 	return (dup);
+// }
 
 static void	*gnl_memcpy(char *dst, char *src, size_t n)
 {

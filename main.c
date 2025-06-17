@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ep <ep@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/17 00:53:49 by ep               ###   ########.fr       */
+/*   Updated: 2025/06/17 17:50:16 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "include/so_long.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -21,7 +20,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int	handle_keypress(int keycode, t_vars *vars)
+int	handle_keypress(int keycode, t_game *vars)
 {
 	if (keycode == KEY_ESC)
 	{
@@ -30,64 +29,75 @@ int	handle_keypress(int keycode, t_vars *vars)
 	}
 	if (keycode == W || keycode == UP_ARROW)
 	{
-		__builtin_printf("%s\n", "UP");
+		ft_printf("%s\n", "UP");
 	}
 	if (keycode == S || keycode == DOWN_ARROW)
 	{
-		__builtin_printf("%s\n", "DOWN");
+		ft_printf("%s\n", "DOWN");
 	}
 	if (keycode == A || keycode == LEFT_ARROW)
 	{
-		__builtin_printf("%s\n", "LEFT");
+		ft_printf("%s\n", "LEFT");
 	}
 	if (keycode == D || keycode == RIGHT_ARROW)
 	{
-		__builtin_printf("%s\n", "RIGHT");
+		ft_printf("%s\n", "RIGHT");
 	}
 	// else
-	// 	__builtin_printf("%d\n", keycode);
+	// 	ft_printf("%d\n", keycode);
 	return (0);
 }
 
 
-int	close_window(t_vars *vars)
+
+int	close_window(t_game *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
 
-void texture_fill(t_data *img, int y, int x, int limits_y, int limits_x, int color)
+void texture_fill(t_data *img, int x, int y, int limits_x, int limits_y, int color)
 {
-	int	cur_x;
+	int	cur_y;
 
-	while (y <= limits_y)
+	while (x <= limits_x)
 	{
-		cur_x = x;
-		while (cur_x <= limits_x)
+		cur_y = y;
+		while (cur_y <= limits_y)
 		{
-			my_mlx_pixel_put(img, y, cur_x, color);
-			cur_x++;
+			my_mlx_pixel_put(img, x, cur_y, color);
+			cur_y++;
 		}
-		y++;
+		x++;
 	}
 }
 
 int	main(void)
 {
-	t_vars	vars;
+	t_game	vars;
 	t_data	img;
-	int	x;
-	int y;
+	int		x;
+	int		y;
+	int		max_x;
+	int		max_y;
+
+	treatment_map("maps/map1.ber");
+
+	max_x = 800;
+	max_y = 500;
 
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "so_long");
-	img.img = mlx_new_image(vars.mlx, 1920, 1080);
+	vars.win = mlx_new_window(vars.mlx, max_x, max_y, "so_long");
+	img.img = mlx_new_image(vars.mlx, max_x, max_y);
 	img.addr = mlx_get_data_addr(img.img,
 			&img.bits_per_pixel, &img.line_length, &img.endian);
-	y = 5;
-	x = 5;
-	texture_fill(&img, y, x, x + 50, y + 50, 0x00FF0000);
+	y = 0;
+	x = 0;
+	texture_fill(&img, x, y, max_x, y + 50, 0x00FF0000);
+	texture_fill(&img, x, y, x + 50, max_y, 0x00FF0000);
+	texture_fill(&img, max_x - 50, y, max_x, max_y, 0x00FF0000);
+	texture_fill(&img, x, max_y - 50, max_x, max_y, 0x00FF0000);
 	y = 55;
 	x = 55;
 	texture_fill(&img, y, x, x + 50, y + 50, 0x0000FF00);
