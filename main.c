@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/18 19:14:35 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/18 19:18:49 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(void)
 	map.path = "maps/map1.ber";
 	game.map = &map;
 	treatment_map(&map);
-	load_map(&map);
+	// load_map(&map);
 
 	max_x = 800;
 	max_y = 500;
