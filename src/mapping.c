@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:56:00 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/18 17:13:22 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:58:31 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,30 +91,20 @@ int	count_height(t_map *map)
 	return (map->height);
 }
 
-int	are_symbols_valid(t_map *map, char *line, int is_filled)
+void	are_symbols_valid(t_map *map)
 {
-	if (is_filled == 0)
-	{
-		map->count_p += symbol_counter(map, line, 'P');
-		map->count_e += symbol_counter(map, line, 'E');
-		map->count_c += symbol_counter(map, line, 'C');
-		return (0);
-	}
-	else
-	{
-		ft_printf("Nb of player | %d |", map->count_p);
-		if (map->count_p != 1)
-			return (ft_printf("Error\nOne player needed.\n"),
-				exit(EXIT_SUCCESS), 0);
-		if (map->count_e != 1)
-			return (ft_printf("Error\nOne exit needed.\n"),
-				exit(EXIT_SUCCESS), 0);
-		if (map->count_c < 1)
-			return (ft_printf("Error\nAt least 1 collectible needed.\n"),
-				exit(EXIT_SUCCESS), 0);
-		return (1);
-	}
-	return (0);
+	ft_printf("Nb of player | %d |\n", map->count_p);
+	ft_printf("Nb of exit | %d |\n", map->count_e);
+	ft_printf("Nb of collectibles | %d |\n", map->count_c);
+	if (map->count_p != 1)
+		return (ft_printf("Error\nOne player needed.\n"),
+			exit(EXIT_SUCCESS), (void)0);
+	if (map->count_e != 1)
+		return (ft_printf("Error\nOne exit needed.\n"),
+			exit(EXIT_SUCCESS), (void)0);
+	if (map->count_c < 1)
+		return (ft_printf("Error\nAt least 1 collectible needed.\n"),
+			exit(EXIT_SUCCESS), (void)0);
 }
 
 int	map_parsing(t_map *map)
@@ -134,13 +124,15 @@ int	map_parsing(t_map *map)
 			map->width = len;
 		else if (len != map->width)
 			return (free(line), ft_printf("Error\nMap is not rectangular\n"), 0);
-		are_symbols_valid(map, line, 0);
+		map->count_p += symbol_counter(map, line, 'P');
+		map->count_e += symbol_counter(map, line, 'E');
+		map->count_c += symbol_counter(map, line, 'C');
 		if (!check_border(map, line, row) || !check_cty(map, line))
 			return (ft_printf("Error\nMap is not valid.\n"), free(line), 0);
 		free(line);
 		row++;
 	}
-	are_symbols_valid(map, line, 1);
+	are_symbols_valid(map);
 	close(fd);
 	return (1);
 }

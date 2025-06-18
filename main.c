@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/18 17:20:09 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:40:03 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,16 @@ void texture_fill(t_data *img, int x, int y, int limits_x, int limits_y, int col
 int	main(void)
 {
 	t_game	game;
+	t_map	map;
 	t_data	img;
 	int		x;
 	int		y;
 	int		max_x;
 	int		max_y;
 
-	game.map->path = "maps/map1.ber";
-	treatment_map(game.map);
+	map.path = "maps/map1.ber";
+	game.map = &map;
+	treatment_map(&map);
 
 	max_x = 800;
 	max_y = 500;
