@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/17 17:48:59 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:12:32 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,20 @@ typedef struct s_data
 	int		endian;
 }				t_data;
 
+typedef struct s_map
+{
+	char	**grid;
+	char	*path;
+	int		width;
+	int		height;
+	int		count_p;
+	int		count_e;
+	int		count_c;
+}				t_map;
+
 typedef struct s_game
 {
-	char	**map;
+	t_map	*map;
 	int		width;
 	int		height;
 	int		px;
@@ -58,19 +69,9 @@ typedef struct s_game
 	t_data	tiles[5];	
 }				t_game;
 
-typedef struct s_map
-{
-	char	**grid;
-	int		width;
-	int		height;
-	int		count_p;
-	int		count_e;
-	int		count_c;
-}				t_map;
-
 void	print_map(const char *path);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		handle_keypress(int keycode, t_game *vars);
-void	treatment_map(const char *path);
+int		handle_keypress(int keycode, t_game *game);
+void	treatment_map(t_map *map);
 
 #endif

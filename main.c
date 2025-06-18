@@ -6,11 +6,11 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/17 17:50:16 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:20:09 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/so_long.h"
+#include "so_long.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -20,11 +20,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int	handle_keypress(int keycode, t_game *vars)
+int	handle_keypress(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_window(game->mlx, game->win);
 		exit(0);
 	}
 	if (keycode == W || keycode == UP_ARROW)
@@ -50,9 +50,9 @@ int	handle_keypress(int keycode, t_game *vars)
 
 
 
-int	close_window(t_game *vars)
+int	close_window(t_game *game)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_window(game->mlx, game->win);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -75,21 +75,22 @@ void texture_fill(t_data *img, int x, int y, int limits_x, int limits_y, int col
 
 int	main(void)
 {
-	t_game	vars;
+	t_game	game;
 	t_data	img;
 	int		x;
 	int		y;
 	int		max_x;
 	int		max_y;
 
-	treatment_map("maps/map1.ber");
+	game.map->path = "maps/map1.ber";
+	treatment_map(game.map);
 
 	max_x = 800;
 	max_y = 500;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, max_x, max_y, "so_long");
-	img.img = mlx_new_image(vars.mlx, max_x, max_y);
+	game.mlx = mlx_init();
+	game.win = mlx_new_window(game.mlx, max_x, max_y, "so_long");
+	img.img = mlx_new_image(game.mlx, max_x, max_y);
 	img.addr = mlx_get_data_addr(img.img,
 			&img.bits_per_pixel, &img.line_length, &img.endian);
 	y = 0;
@@ -102,9 +103,9 @@ int	main(void)
 	x = 55;
 	texture_fill(&img, y, x, x + 50, y + 50, 0x0000FF00);
 
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-	mlx_key_hook(vars.win, handle_keypress, &vars);
-	mlx_hook(vars.win, 17, 0, close_window, &vars);
-	mlx_loop(vars.mlx);
+	mlx_put_image_to_window(game.mlx, game.win, img.img, 0, 0);
+	mlx_key_hook(game.win, handle_keypress, &game);
+	mlx_hook(game.win, 17, 0, close_window, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }

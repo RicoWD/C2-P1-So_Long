@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   mapping.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ep <ep@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:56:00 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/18 02:07:13 by ep               ###   ########.fr       */
+/*   Updated: 2025/06/18 17:13:22 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 static int	is_allowed(char c)
 {
 	return (c == '0' || c == '1' || c == 'C' || c == 'E' || c == 'P');
 }
 
-int	check_line_conformity(char *line, int width)
+int	check_cty(t_map *map, char *line)
 {
 	int	col;
 
 	col = 0;
-	while (col < width)
+	while (col < map->width)
 	{
 		if (!is_allowed(line[col]))
 			return (ft_printf("Error\nchar '%c' is not valid.\n",
@@ -32,14 +32,14 @@ int	check_line_conformity(char *line, int width)
 	return (1);
 }
 
-int	symbol_counter(char *line, char symbol, int width)
+int	symbol_counter(t_map *map, char *line, char symbol)
 {
 	int	n;
 	int	col;
 
 	col = 0;
 	n = 0;
-	while (col < width)
+	while (col < map->width)
 	{
 		if (line[col] == symbol)
 			n++;
@@ -48,81 +48,109 @@ int	symbol_counter(char *line, char symbol, int width)
 	return (n);
 }
 
-int	check_line_border(char *line, int row, int height, int width)
+int	check_border(t_map *map, char *line, int row)
 {
 	int	col;
 
 	col = 0;
-	while (col < width)
+	while (col < map->width)
 	{
-		if (row == 0 || row == height - 1)
+		if (row == 0 || row == map->height - 1)
 		{
 			if (line[col] != '1')
-				return (ft_printf("Error\nChar '%c' is not a '1' (wall) for the map's border.\n", line[col]), (0));
+				return (ft_printf("Error\nChar '%c' is not a '1' (wall)\n",
+						line[col]), (0));
 		}
 		else
 		{
-			if (col == 0 || col == width - 1)
+			if (col == 0 || col == map->width - 1)
 				if (line[col] != '1')
-					return (ft_printf("Error\nchar '%c' is not a '1' (wall) for the map's border.\n", line[col]), (0));
+					return (ft_printf("Error\nChar '%c' is not a '1' (wall)\n",
+							line[col]), (0));
 		}
 		col++;
 	}
 	return (1);
 }
 
-void	treatment_map(const char *path)
+int	count_height(t_map *map)
+{
+	int		fd;
+	char	*line;
+
+	fd = open(map->path, O_RDONLY);
+	if (fd < 0)
+		return (perror("open"), 0);
+	map->height = 0;
+	while ((line = get_next_line(fd)))
+	{
+		map->height++;
+		free(line);
+	}
+	close(fd);
+	return (map->height);
+}
+
+int	are_symbols_valid(t_map *map, char *line, int is_filled)
+{
+	if (is_filled == 0)
+	{
+		map->count_p += symbol_counter(map, line, 'P');
+		map->count_e += symbol_counter(map, line, 'E');
+		map->count_c += symbol_counter(map, line, 'C');
+		return (0);
+	}
+	else
+	{
+		ft_printf("Nb of player | %d |", map->count_p);
+		if (map->count_p != 1)
+			return (ft_printf("Error\nOne player needed.\n"),
+				exit(EXIT_SUCCESS), 0);
+		if (map->count_e != 1)
+			return (ft_printf("Error\nOne exit needed.\n"),
+				exit(EXIT_SUCCESS), 0);
+		if (map->count_c < 1)
+			return (ft_printf("Error\nAt least 1 collectible needed.\n"),
+				exit(EXIT_SUCCESS), 0);
+		return (1);
+	}
+	return (0);
+}
+
+int	map_parsing(t_map *map)
 {
 	int		fd;
 	char	*line;
 	int		row;
-	int		height;
 	int		len;
-	int		width;
-	int		p;
-	int		e;
-	int		c;
 
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (perror("open"), (void)0);
-	height = 0;
-	while ((line = get_next_line(fd)))
-	{
-		height++;
-		free(line);
-	}
-	close(fd);
-	ft_printf("%d\n", height);
-	fd = open(path, O_RDONLY);
-	width = -1;
+	fd = open(map->path, O_RDONLY);
+	map->width = -1;
 	row = 0;
-	p = 0;
-	e = 0;
-	c = 0;
 	while ((line = get_next_line(fd)))
 	{
-		ft_printf("%s", line);
 		len = ft_strlen(line) - (line[ft_strlen(line)-1] == '\n');
-		if (width == -1)
-			width = len;
-		else if (len != width)
-			return (free(line), ft_printf("Error\nThe map is not rectangular\n"), (void)0);
-		p += symbol_counter(line, 'P', width);
-		e += symbol_counter(line, 'E', width);
-		c += symbol_counter(line, 'C', width);
-		if (!check_line_border(line, row, height, width) || !check_line_conformity(line, width))
-			return (ft_printf("Error\nThe map is not valid.\n"), free(line), (void)0);
+		if (map->width == -1)
+			map->width = len;
+		else if (len != map->width)
+			return (free(line), ft_printf("Error\nMap is not rectangular\n"), 0);
+		are_symbols_valid(map, line, 0);
+		if (!check_border(map, line, row) || !check_cty(map, line))
+			return (ft_printf("Error\nMap is not valid.\n"), free(line), 0);
 		free(line);
 		row++;
 	}
-	if (p != 1)
-		return (ft_printf("Error\nOne player needed.\n"), (void)0);
-	if (e != 1)
-		return (ft_printf("Error\nOne exit needed.\n"), (void)0);
-	if (c < 1)
-		return (ft_printf("Error\nAt least 1 collectible needed.\n"), (void)0);
-
+	are_symbols_valid(map, line, 1);
 	close(fd);
-	ft_printf("\n");
+	return (1);
+}
+
+void	treatment_map(t_map *map)
+{
+	map->height = count_height(map);
+	ft_printf("Map parsing value |%d|\n", map_parsing(map));
+	if (map_parsing(map))
+	{
+		printf("Map can be parsed");
+	}
 }

@@ -6,9 +6,11 @@
 #    By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 02:58:34 by erpascua          #+#    #+#              #
-#    Updated: 2025/06/17 18:24:34 by erpascua         ###   ########.fr        #
+#    Updated: 2025/06/18 17:14:16 by erpascua         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+.SILENT:
 
 #******************************************************************************#
 #									  CONFIG								   #
@@ -16,7 +18,7 @@
 
 NAME		= 	so_long
 CC			=	cc
-CFLAGS      =	-Wall -Wextra -Werror -Iinclude -I./minilibx-linux -I./$(LIBFT_DIR)
+CFLAGS      =	-Wall -Wextra -Werror -Iinclude -I./include -I./minilibx-linux -I./$(LIBFT_DIR)
 LDFLAGS		= 	-L./minilibx-linux -lmlx -lX11 -lXext -lm -L./$(LIBFT_DIR) -lft
 RM			=	rm -f
 
@@ -37,6 +39,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_A)
 	@$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
+	@echo "Compilation done !"
 
 $(LIBFT_A): $(LIBFT_OBJ)
 	@ar rcs $@ $^
