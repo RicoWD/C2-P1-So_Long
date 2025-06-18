@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/18 17:12:32 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/18 18:57:08 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 # ifdef __APPLE__
 #  define KEY_ESC 53
 # else
-#  include <X11/keysym.h>
-#  define KEY_ESC XK_Escape
+#  define KEY_ESC 65307
 # endif
 
 # define W 119
@@ -73,5 +72,8 @@ void	print_map(const char *path);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		handle_keypress(int keycode, t_game *game);
 void	treatment_map(t_map *map);
+int		symbol_counter(t_map *map, char *line, char symbol);
+int		check_border(t_map *map, char *line, int row);
+int		count_height(t_map *map);
 
 #endif
