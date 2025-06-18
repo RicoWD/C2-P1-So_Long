@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/18 18:26:11 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/18 19:14:35 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 int	handle_keypress(int keycode, t_game *game)
@@ -43,12 +43,8 @@ int	handle_keypress(int keycode, t_game *game)
 	{
 		ft_printf("%s\n", "RIGHT");
 	}
-	// else
-	// 	ft_printf("%d\n", keycode);
 	return (0);
 }
-
-
 
 int	close_window(t_game *game)
 {
@@ -57,7 +53,7 @@ int	close_window(t_game *game)
 	return (0);
 }
 
-void texture_fill(t_data *img, int x, int y, int limits_x, int limits_y, int color)
+void	texture_fill(t_data *img, int x, int y, int limits_x, int limits_y, int color)
 {
 	int	cur_y;
 
@@ -86,6 +82,7 @@ int	main(void)
 	map.path = "maps/map1.ber";
 	game.map = &map;
 	treatment_map(&map);
+	load_map(&map);
 
 	max_x = 800;
 	max_y = 500;

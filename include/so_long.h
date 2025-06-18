@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/18 18:57:08 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/18 19:06:15 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@
 # define DOWN_ARROW 65364
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
+
+typedef struct s_positions
+{
+	int	x;
+	int	y;
+	int	max_x;
+	int	max_y;
+}				t_positions;
 
 typedef struct s_data
 {

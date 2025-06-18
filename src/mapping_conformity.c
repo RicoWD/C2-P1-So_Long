@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapping.c                                          :+:      :+:    :+:   */
+/*   mapping_conformity.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:56:00 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/18 18:48:09 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/18 19:15:51 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,5 @@ void	treatment_map(t_map *map)
 	line = get_next_line(fd);
 	row = 0;
 	if (map_parsing(map, fd, line, row))
-	{
 		printf("Map can be parsed");
-	}
 }
