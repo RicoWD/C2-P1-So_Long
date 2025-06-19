@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ep <ep@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/18 19:06:15 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/19 03:19:43 by ep               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # else
 #  define KEY_ESC 65307
 # endif
+
+# define TILE 64
 
 # define W 119
 # define S 115
@@ -65,14 +67,16 @@ typedef struct s_map
 typedef struct s_game
 {
 	t_map	*map;
-	int		width;
-	int		height;
-	int		px;
-	int		py;
-	int		n_collect;
-	int		moves;
 	void	*mlx;
 	void	*win;
+	void	*img_wall;
+	void	*img_floor;
+	void	*img_player;
+	void	*img_collect;
+	void	*img_exit;
+	int		px;
+	int		py;
+	int		moves;
 	t_data	tiles[5];	
 }				t_game;
 
@@ -83,5 +87,7 @@ void	treatment_map(t_map *map);
 int		symbol_counter(t_map *map, char *line, char symbol);
 int		check_border(t_map *map, char *line, int row);
 int		count_height(t_map *map);
+void	load_map(t_game *game, t_map *map);
+int		window_setup(t_game *game);
 
 #endif
