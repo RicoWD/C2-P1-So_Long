@@ -3,14 +3,32 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+         #
+#    By: ep <ep@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 02:58:34 by erpascua          #+#    #+#              #
-#    Updated: 2025/06/18 17:14:16 by erpascua         ###   ########.fr        #
+#    Updated: 2025/06/19 00:03:58 by ep               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SILENT:
+
+#******************************************************************************#
+#							   MINILIBX OS CHOICE							   #
+#******************************************************************************#
+
+UNAME_S			:= $(shell uname -s)
+
+ifeq ($(UNAME_S),Darwin)
+	MLX_DIR		:= minilibx-macos
+	MLX_LIB		:= $(MLX_DIR)/libmlx.a
+	MLX_INC		:= -I$(MLX_DIR)
+	MLX_LDFLAGS	:= $(MLX_LIB) -framework OpenGL -framework AppKit
+else
+	MLX_DIR		:= minilibx-linux
+	MLX_LIB		:= $(MLX_DIR)/libmlx_Linux.a
+	MLX_INC		:= -I$(MLX_DIR)
+	MLX_LDFLAGS	:= -L$(MLX_DIR) -lmlx -lX11 -lXext
+endif
 
 #******************************************************************************#
 #									  CONFIG								   #
@@ -18,8 +36,8 @@
 
 NAME		= 	so_long
 CC			=	cc
-CFLAGS      =	-Wall -Wextra -Werror -Iinclude -I./include -I./minilibx-linux -I./$(LIBFT_DIR)
-LDFLAGS		= 	-L./minilibx-linux -lmlx -lX11 -lXext -lm -L./$(LIBFT_DIR) -lft
+CFLAGS		=	-Wall -Wextra -Werror -Iinclude -I./include $(MLX_INC) -I$(LIBFT_DIR)
+LDFLAGS		=	$(MLX_LDFLAGS) -L$(LIBFT_DIR) -lft -lm
 RM			=	rm -f
 
 LIBFT_DIR	=	libft
@@ -39,7 +57,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_A)
 	@$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
-	@echo "Compilation done !"
+	@echo "✅  $(NAME) built"
 
 $(LIBFT_A): $(LIBFT_OBJ)
 	@ar rcs $@ $^
@@ -47,12 +65,12 @@ $(LIBFT_A): $(LIBFT_OBJ)
 clean:
 	@$(RM) $(OBJ)
 	@$(RM) $(LIBFT_OBJ)
-	@echo "CLEAN applied : object files deleted"
+	@echo "✅  Objects files deleted"
 
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) $(LIBFT_A)
-	@echo "FCLEAN applied : all binaries deleted"
+	@echo "✅  Binaries deleted"
 
 re: fclean all
 
