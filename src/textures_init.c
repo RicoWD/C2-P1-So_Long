@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:44:37 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/20 20:26:25 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/20 20:35:27 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void	load_map(t_game *game, int trigger)
 	char	*line;
 	int		len;
 	int		row;
-	int		triger;
 
 	fd = open(game->map->path, O_RDONLY);
 	if (fd < 0)
@@ -134,6 +133,5 @@ void	load_map(t_game *game, int trigger)
 		line = get_next_line(fd);
 		row++;
 	}
-	ft_printf("INIT py = %d px = %d\n", game->py, game->px);
 	close(fd);
 }

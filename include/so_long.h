@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/20 20:27:10 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/20 20:37:08 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ void	load_map(t_game *game, int trigger);
 int		window_setup(t_game *game);
 void	get_player_init_pos(t_game *game, char *line, int y);
 void	map_displayer(t_game *game, int x, int y, t_tex id);
+int		handle_keypress(int keycode, t_game *game);
 
 #endif

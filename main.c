@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/20 20:28:17 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/20 20:35:54 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,49 +18,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-int	handle_keypress(int keycode, t_game *game)
-{
-	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_window(game->mlx, game->win);
-		exit(0);
-	}
-	if (keycode == W || keycode == UP_ARROW)
-	{
-		game->py--;
-		ft_printf("%s\n", "UP");
-		ft_printf("py = %d px = %d\n", game->py, game->px);
-		load_map(&game, 0);
-		map_displayer(game, game->px, game->py, TEX_PLAYER);
-
-	}
-	if (keycode == S || keycode == DOWN_ARROW)
-	{
-		game->py++;
-		ft_printf("%s\n", "DOWN");
-		ft_printf("py = %d px = %d\n", game->py, game->px);
-		load_map(&game, 0);
-		map_displayer(game, game->px, game->py, TEX_PLAYER);
-	}
-	if (keycode == A || keycode == RIGHT_ARROW)
-	{
-		game->px++;
-		ft_printf("%s\n", "LEFT");
-		ft_printf("py = %d px = %d\n", game->py, game->px);
-		load_map(&game, 0);
-		map_displayer(game, game->px, game->py, TEX_PLAYER);
-	}
-	if (keycode == D || keycode == LEFT_ARROW)
-	{
-		game->px--;
-		ft_printf("%s\n", "RIGHT");
-		ft_printf("py = %d px = %d\n", game->py, game->px);
-		load_map(&game, 0);
-		map_displayer(game, game->px, game->py, TEX_PLAYER);
-	}
-	return (0);
 }
 
 int	close_window(t_game *game)
