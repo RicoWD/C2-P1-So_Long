@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:56:00 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/18 19:15:51 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:56:50 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ void	treatment_map(t_map *map)
 	map->count_c = 0;
 	map->width = -1;
 	map->height = 0;
-	map->height = count_height(map);
+	if (!count_height(map))
+		return ;
 	fd = open(map->path, O_RDONLY);
 	line = get_next_line(fd);
 	row = 0;

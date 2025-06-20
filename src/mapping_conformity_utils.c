@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapping_conformity.c                               :+:      :+:    :+:   */
+/*   mapping_conformity_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/18 18:43:17 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/20 19:38:09 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ int	count_height(t_map *map)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (map->height);
+	return (1);
 }

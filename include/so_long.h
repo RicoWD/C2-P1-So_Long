@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ep <ep@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/19 03:19:43 by ep               ###   ########.fr       */
+/*   Updated: 2025/06/20 20:27:10 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@
 # define DOWN_ARROW 65364
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
+
+typedef enum e_tex
+{
+	TEX_FLOOR,
+	TEX_WALL,
+	TEX_PLAYER,
+	TEX_COLLECT,
+	TEX_EXIT,
+	NB_TEX
+}	t_tex;
 
 typedef struct s_positions
 {
@@ -69,15 +79,10 @@ typedef struct s_game
 	t_map	*map;
 	void	*mlx;
 	void	*win;
-	void	*img_wall;
-	void	*img_floor;
-	void	*img_player;
-	void	*img_collect;
-	void	*img_exit;
+	void	*tex[NB_TEX];
 	int		px;
 	int		py;
 	int		moves;
-	t_data	tiles[5];	
 }				t_game;
 
 void	print_map(const char *path);
@@ -87,7 +92,9 @@ void	treatment_map(t_map *map);
 int		symbol_counter(t_map *map, char *line, char symbol);
 int		check_border(t_map *map, char *line, int row);
 int		count_height(t_map *map);
-void	load_map(t_game *game, t_map *map);
+void	load_map(t_game *game, int trigger);
 int		window_setup(t_game *game);
+void	get_player_init_pos(t_game *game, char *line, int y);
+void	map_displayer(t_game *game, int x, int y, t_tex id);
 
 #endif
