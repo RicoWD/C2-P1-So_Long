@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ep <ep@student.42.fr>                      +#+  +:+       +#+         #
+#    By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 02:58:34 by erpascua          #+#    #+#              #
-#    Updated: 2025/06/19 00:03:58 by ep               ###   ########.fr        #
+#    Updated: 2025/06/20 16:04:42 by erpascua         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ NAME		= 	so_long
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -Iinclude -I./include $(MLX_INC) -I$(LIBFT_DIR)
 LDFLAGS		=	$(MLX_LDFLAGS) -L$(LIBFT_DIR) -lft -lm
-RM			=	rm -f
+RM			=	/bin/rm -f
 
 LIBFT_DIR	=	libft
 LIBFT_A		=	$(LIBFT_DIR)/libft.a
