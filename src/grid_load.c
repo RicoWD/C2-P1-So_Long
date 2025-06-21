@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grid_load.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ep <ep@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/20 19:38:09 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:45:14 by ep               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*line_ndup(char *line, size_t size)
 	l = malloc (size);
 	if (!l)
 		return (NULL);
+	i = 0;
 	while (i < size)
 	{
 		l[i] = line[i];
@@ -30,9 +31,9 @@ char	*line_ndup(char *line, size_t size)
 
 void    grid_load(t_map *map)
 {
-    int     fd;
-    char    *line;
-    int     row;
+    int		fd;
+    char	*line;
+    int		row;
 
 	fd = open(map->path, O_RDONLY);
 	if (fd < 0)
@@ -40,12 +41,13 @@ void    grid_load(t_map *map)
 	map->grid = malloc (map->height * sizeof(char *));
 	if (!map->grid)
 		exit(EXIT_FAILURE);
+	row = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-
 		map->grid[row] = line_ndup(line, map->width);
 		row++;
+		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
