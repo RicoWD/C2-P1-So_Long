@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_controls.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 20:36:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/20 20:39:27 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:38:52 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,23 @@ void move_player(t_game *game, int new_x, int new_y)
 		return;
 	if (game->map->grid[new_y][new_x] == '0' || game->map->grid[new_y][new_x] == 'C')
 	{
-		game->map->grid[game->py][game->px] = '0'; // Clear old position
+		if (game->map->grid[new_y][new_x] == 'C')
+			game->map->remaining_c--;
+		game->map->grid[game->py][game->px] = '0';
+		map_displayer(game, game->px, game->py, TEX_FLOOR);
 		game->px = new_x;
 		game->py = new_y;
-		game->map->grid[game->py][game->px] = 'P'; // Set new position
+		game->map->grid[game->py][game->px] = 'P';
 		game->moves++;
 		ft_printf("Moves: %d\n", game->moves);
 		map_displayer(game, game->px, game->py, TEX_PLAYER);
 	}
+	if (game->map->remaining_c == 0)
+		ft_printf("All items collected !\n");
+	if (game->map->grid[new_y][new_x] == 'E' && game->map->remaining_c > 0)
+		ft_printf("Not yet... You still have %d items to collect\n", game->map->remaining_c);
+	if (game->map->grid[new_y][new_x] == 'E' && game->map->remaining_c == 0)
+		exit(EXIT_SUCCESS);
 }
 
 int	handle_keypress(int keycode, t_game *game)
@@ -45,12 +54,11 @@ int	handle_keypress(int keycode, t_game *game)
 	{
 		ft_printf("%s\n", "DOWN");
 		move_player(game, game->px, game->py + 1);
-		load_map(game, 0);
+		//load_map(game, 0);
 		//map_displayer(game, game->px, game->py, TEX_PLAYER);
 	}
 	if (keycode == A || keycode == RIGHT_ARROW)
 	{
-		game->px++;
 		ft_printf("%s\n", "LEFT");
 		move_player(game, game->px + 1, game->py);
 		//ft_printf("py = %d px = %d\n", game->py, game->px);
@@ -59,7 +67,6 @@ int	handle_keypress(int keycode, t_game *game)
 	}
 	if (keycode == D || keycode == LEFT_ARROW)
 	{
-		game->px--;
 		ft_printf("%s\n", "RIGHT");
 		move_player(game, game->px - 1, game->py);
 		//ft_printf("py = %d px = %d\n", game->py, game->px);

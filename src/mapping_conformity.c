@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapping_conformity.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:56:00 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/20 17:56:50 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:16:28 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	map_parsing(t_map *map, int fd, char *line, int row)
 		line = get_next_line(fd);
 		row++;
 	}
+	map->remaining_c = map->count_c;
 	are_symbols_valid(map);
 	close(fd);
 	return (1);
