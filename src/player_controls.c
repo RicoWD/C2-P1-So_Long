@@ -12,6 +12,22 @@
 
 #include "so_long.h"
 
+void move_player(t_game *game, int new_x, int new_y)
+{
+	if (new_x < 0 || new_x >= game->map->width || new_y < 0 || new_y >= game->map->height)
+		return;
+	if (game->map->grid[new_y][new_x] == '0' || game->map->grid[new_y][new_x] == 'C')
+	{
+		game->map->grid[game->py][game->px] = '0'; // Clear old position
+		game->px = new_x;
+		game->py = new_y;
+		game->map->grid[game->py][game->px] = 'P'; // Set new position
+		game->moves++;
+		ft_printf("Moves: %d\n", game->moves);
+		map_displayer(game, game->px, game->py, TEX_PLAYER);
+	}
+}
+
 int	handle_keypress(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
@@ -21,36 +37,34 @@ int	handle_keypress(int keycode, t_game *game)
 	}
 	if (keycode == W || keycode == UP_ARROW)
 	{
-		game->py--;
 		ft_printf("%s\n", "UP");
-		ft_printf("py = %d px = %d\n", game->py, game->px);
-		// load_map(game, 0);
-		map_displayer(game, game->px, game->py, TEX_PLAYER);
-
+		move_player(game, game->px, game->py - 1);
+		// map_displayer(game, game->px, game->py, TEX_PLAYER);
 	}
 	if (keycode == S || keycode == DOWN_ARROW)
 	{
-		game->py++;
 		ft_printf("%s\n", "DOWN");
-		ft_printf("py = %d px = %d\n", game->py, game->px);
+		move_player(game, game->px, game->py + 1);
 		load_map(game, 0);
-		map_displayer(game, game->px, game->py, TEX_PLAYER);
+		//map_displayer(game, game->px, game->py, TEX_PLAYER);
 	}
 	if (keycode == A || keycode == RIGHT_ARROW)
 	{
 		game->px++;
 		ft_printf("%s\n", "LEFT");
-		ft_printf("py = %d px = %d\n", game->py, game->px);
-		load_map(game, 0);
-		map_displayer(game, game->px, game->py, TEX_PLAYER);
+		move_player(game, game->px + 1, game->py);
+		//ft_printf("py = %d px = %d\n", game->py, game->px);
+		//load_map(game, 0);
+		//map_displayer(game, game->px, game->py, TEX_PLAYER);
 	}
 	if (keycode == D || keycode == LEFT_ARROW)
 	{
 		game->px--;
 		ft_printf("%s\n", "RIGHT");
-		ft_printf("py = %d px = %d\n", game->py, game->px);
-		load_map(game, 0);
-		map_displayer(game, game->px, game->py, TEX_PLAYER);
+		move_player(game, game->px - 1, game->py);
+		//ft_printf("py = %d px = %d\n", game->py, game->px);
+		//load_map(game, 0);
+		//map_displayer(game, game->px, game->py, TEX_PLAYER);
 	}
 	return (0);
 }

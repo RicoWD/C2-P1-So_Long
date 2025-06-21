@@ -51,6 +51,7 @@ int	main(void)
 	map.path = "maps/map1.ber";
 	game.map = &map;
 	treatment_map(&map);
+	grid_load(&map);
 	if (window_setup(&game))
 		return (EXIT_FAILURE);
 	load_map(&game, 1);

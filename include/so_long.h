@@ -97,5 +97,6 @@ int		window_setup(t_game *game);
 void	get_player_init_pos(t_game *game, char *line, int y);
 void	map_displayer(t_game *game, int x, int y, t_tex id);
 int		handle_keypress(int keycode, t_game *game);
+void    grid_load(t_map *map);
 
 #endif
