@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/23 00:18:07 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/06/23 17:49:34 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,15 @@ typedef enum e_tex
 	NB_TEX
 }	t_tex;
 
+typedef enum e_lvl
+{
+	LEVEL0,
+	LEVEL1,
+	LEVEL2,
+	LEVEL3,
+	NB_LVL
+}	t_lvl;
+
 typedef struct s_positions
 {
 	int	x;
@@ -94,6 +103,8 @@ typedef struct s_game
 	void	*mlx;
 	void	*win;
 	void	*tex[NB_TEX];
+	void	*lvl[NB_LVL + 1];
+	int		cur_lvl;
 	int		px;
 	int		py;
 	char	*ath_path;
@@ -115,8 +126,10 @@ int		window_setup(t_game *game);
 void	get_player_init_pos(t_game *game, char *line, int y);
 void	map_displayer(t_game *game, int x, int y, t_tex id);
 int		handle_keypress(int keycode, t_game *game);
-void    grid_load(t_map *map);
+void	grid_load(t_map *map);
 void	update_ath(t_game *game, int x, int y, int color, char *txt);
+int		close_window(t_game *game);
+void	textures_init(t_game *game);
 
 
 #endif

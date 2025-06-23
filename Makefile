@@ -6,7 +6,7 @@
 #    By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 02:58:34 by erpascua          #+#    #+#              #
-#    Updated: 2025/06/20 16:04:42 by erpascua         ###   ########.fr        #
+#    Updated: 2025/06/23 15:53:30 by erpascua         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,4 +74,9 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+dev: 
+	@make re 1>/dev/null
+	@make clean 1>/dev/null
+	@echo "✅  Library created and objects deleted"
+
+.PHONY: all clean fclean re dev

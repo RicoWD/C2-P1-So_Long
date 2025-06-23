@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ath_load.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:18:20 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/06/23 01:57:02 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/06/23 14:29:42 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,67 +41,73 @@ void	num_to_xpm(t_game *game, int nb, int x, int y)
 		map_displayer(game, x, y, TEX_9);
 }
 
-static void draw_number(t_game *game, int value, int x, int y)
+static void	draw_number(t_game *game, int value, int x, int y)
 {
-    char	*s;
-    size_t	i;
-	
+	char	*s;
+	size_t	i;
+
 	s = ft_itoa(value);
 	i  = 0;
-    while (i < ft_strlen(s) && x + (int)i < game->map->width)
-    {
-        num_to_xpm(game, s[i] - '0', x + i, y);
-        i++;
-    }
-    free(s);
+	while (i < ft_strlen(s) && x + (int)i < game->map->width)
+	{
+		num_to_xpm(game, s[i] - '0', x + i, y);
+		i++;
+	}
+	free(s);
 }
 
-static void draw_ath(t_game *game, char *row)
+static void	draw_ath(t_game *game, char *row)
 {
-    int y;
-    int x;
+	int	y;
+	int	x;
 
 	y = game->map->height;
 	x = 0;
-    while (x < game->map->width)
-        map_displayer(game, x++, y, ATH_TEX_BG);
+	while (x < game->map->width)
+		map_displayer(game, x++, y, ATH_TEX_BG);
     x = 0;
-    while (row[x] && x < game->map->width)
-    {
-        if (row[x] == 'S')
-            map_displayer(game, x, y, ATH_TEX_BG);
-        else if (row[x] == 'H')
-            map_displayer(game, x, y, ATH_TEX_HEART);
-        else if (row[x] == 'P')
-            map_displayer(game, x, y, TEX_PLAYER);
-		else if (row[x] == 'c')
+	while (row[x] && x < game->map->width)
+	{
+		if (row[x] == 'S')
+			map_displayer(game, x, y, ATH_TEX_BG);
+		else if (row[x] == 'h')
 		{
-    		draw_number(game, game->map->remaining_c, x, y);
+			draw_number(game, game->remaining_p_life, x, y);
 			// x += (int)ft_strlen(row) - 1;
 		}
-	    else if (row[x] == 'C')
-            map_displayer(game, x, y, TEX_COLLECT);
+		else if (row[x] == 'H')
+			map_displayer(game, x, y, ATH_TEX_HEART);
+		else if (row[x] == 'P')
+			map_displayer(game, x, y, TEX_PLAYER);
+		else if (row[x] == 'c')
+		{
+			draw_number(game, game->map->remaining_c, x, y);
+			// x += (int)ft_strlen(row) - 1;
+		}
+		else if (row[x] == 'C')
+			map_displayer(game, x, y, TEX_COLLECT);
 		else if (row[x] == 'm' )
 		{
-		 	draw_number(game, game->moves, x, y);
-			// x += (int)ft_strlen(row) - 1;
+			draw_number(game, game->moves, x, y);
+			x += (int)ft_strlen(row) - 1;
 		}
 		else if (row[x] == 'M')
 			map_displayer(game, x, y, TEX_COLLECT);
         x++;
-    }
+	}
 }
 
 
 void load_ath(t_game *g)
 {
-    int  fd  = open(g->ath_path, O_RDONLY);
-    char *line;
+	int		fd;
+	char	*line;
 
-    if (fd < 0 || !(line = get_next_line(fd)))
-        return ((void)perror("ATH"));
-
-    draw_ath(g, line);
-    free(line);
-    close(fd);
+	fd = open(g->ath_path, O_RDONLY);
+	line = get_next_line(fd);
+	if (fd < 0 || !(line))
+		return ((void)perror("ATH"));
+	draw_ath(g, line);
+	free(line);
+	close(fd);
 }

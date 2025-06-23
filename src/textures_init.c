@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:44:37 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/23 01:35:28 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/06/23 15:42:21 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void	textures_init(t_game *game)
 	game->tex[TEX_8] = load_xpm(game->mlx, "textures/alphanum/8.xpm");
 	game->tex[TEX_9] = load_xpm(game->mlx, "textures/alphanum/9.xpm");
 }
-
 
 void	load_map(t_game *game)
 {
