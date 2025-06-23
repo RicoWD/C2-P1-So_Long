@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:56:00 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/21 01:16:28 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/06/22 16:01:49 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static int	is_allowed(char c)
 {
-	return (c == '0' || c == '1' || c == 'C' || c == 'E' || c == 'P');
+	return (c == '0' || c == '1' || c == 'C' || c == 'E' ||
+		c == 'P' || c == 'V');
 }
 
 int	check_cty(t_map *map, char *line)

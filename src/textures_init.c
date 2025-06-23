@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:44:37 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/20 20:35:27 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/23 01:35:28 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	map_displayer(t_game *game, int x, int y, t_tex id)
 		x * TILE, y * TILE);
 }
 
-void	draw_bg(t_game *game)
+void	draw_bg(t_game *game, t_tex id)
 {
 	int		y;
 	int		x;
@@ -29,7 +29,7 @@ void	draw_bg(t_game *game)
 		x = 0;
 		while (x < game->map->width)
 		{
-			map_displayer(game, x, y, TEX_WALL);
+			map_displayer(game, x, y, id);
 			x++;
 		}
 		y++;
@@ -49,6 +49,8 @@ void	draw_map(t_game *game, char *line, int y)
 			map_displayer(game, x, y, TEX_WALL);
 		else if (line[x] == 'E')
 			map_displayer(game, x, y, TEX_EXIT);
+		else if (line[x] == 'V')
+			map_displayer(game, x, y, TEX_VILAIN);
 		x++;
 	}
 }
@@ -100,11 +102,24 @@ void	textures_init(t_game *game)
 	game->tex[TEX_FLOOR] = load_xpm(game->mlx, "textures/floor.xpm");
 	game->tex[TEX_PLAYER] = load_xpm(game->mlx, "textures/player.xpm");
 	game->tex[TEX_COLLECT] = load_xpm(game->mlx, "textures/collect.xpm");
+	game->tex[TEX_VILAIN] = load_xpm(game->mlx, "textures/vilain.xpm");
 	game->tex[TEX_EXIT] = load_xpm(game->mlx, "textures/exit.xpm");
+	game->tex[ATH_TEX_BG] = load_xpm(game->mlx, "textures/ath_bg.xpm");
+	game->tex[ATH_TEX_HEART] = load_xpm(game->mlx, "textures/heart.xpm");
+	game->tex[TEX_0] = load_xpm(game->mlx, "textures/alphanum/0.xpm");
+	game->tex[TEX_1] = load_xpm(game->mlx, "textures/alphanum/1.xpm");
+	game->tex[TEX_2] = load_xpm(game->mlx, "textures/alphanum/2.xpm");
+	game->tex[TEX_3] = load_xpm(game->mlx, "textures/alphanum/3.xpm");
+	game->tex[TEX_4] = load_xpm(game->mlx, "textures/alphanum/4.xpm");
+	game->tex[TEX_5] = load_xpm(game->mlx, "textures/alphanum/5.xpm");
+	game->tex[TEX_6] = load_xpm(game->mlx, "textures/alphanum/6.xpm");
+	game->tex[TEX_7] = load_xpm(game->mlx, "textures/alphanum/7.xpm");
+	game->tex[TEX_8] = load_xpm(game->mlx, "textures/alphanum/8.xpm");
+	game->tex[TEX_9] = load_xpm(game->mlx, "textures/alphanum/9.xpm");
 }
 
 
-void	load_map(t_game *game, int trigger)
+void	load_map(t_game *game)
 {
 	int		fd;
 	char	*line;
@@ -118,7 +133,7 @@ void	load_map(t_game *game, int trigger)
 	if (!line)
 		return (perror("open"));
 	textures_init(game);
-	draw_bg(game);
+	draw_bg(game, TEX_WALL);
 	row = 0;
 	while (line)
 	{
@@ -127,8 +142,7 @@ void	load_map(t_game *game, int trigger)
 			game->map->width = len;
 		draw_map(game, line, row);
 		draw_collect(game, line, row);
-		if (trigger)
-			draw_player(game, line, row);
+		draw_player(game, line, row);
 		get_player_init_pos(game, line, row);
 		line = get_next_line(fd);
 		row++;

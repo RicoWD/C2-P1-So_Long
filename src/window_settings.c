@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_settings.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 00:28:19 by ep                #+#    #+#             */
-/*   Updated: 2025/06/20 19:13:09 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:08:30 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	window_setup(t_game *game)
 		return (1);
 	game->win = mlx_new_window(game->mlx,
 			game->map->width * TILE,
-			game->map->height * TILE,
+			(game->map->height + 1) * TILE,
 			"Rico's So_Long");
 	if (!game->win)
 		return (1);

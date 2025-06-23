@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 20:36:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/21 01:38:52 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/06/23 01:58:20 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,17 @@ void move_player(t_game *game, int new_x, int new_y)
 		game->py = new_y;
 		game->map->grid[game->py][game->px] = 'P';
 		game->moves++;
+		load_ath(game);
+		// update_ath(game, 0, game->map->height + 1 , 0x00FFFF, ft_itoa(game->moves));
 		ft_printf("Moves: %d\n", game->moves);
 		map_displayer(game, game->px, game->py, TEX_PLAYER);
+	}
+	if (game->map->grid[new_y][new_x] == 'V')
+	{
+		game->remaining_p_life--;
+		ft_printf("Lives remaining %d !\n", game->remaining_p_life);
+		if (game->remaining_p_life == 0)
+			exit(EXIT_FAILURE);
 	}
 	if (game->map->remaining_c == 0)
 		ft_printf("All items collected !\n");
@@ -48,30 +57,21 @@ int	handle_keypress(int keycode, t_game *game)
 	{
 		ft_printf("%s\n", "UP");
 		move_player(game, game->px, game->py - 1);
-		// map_displayer(game, game->px, game->py, TEX_PLAYER);
 	}
 	if (keycode == S || keycode == DOWN_ARROW)
 	{
 		ft_printf("%s\n", "DOWN");
 		move_player(game, game->px, game->py + 1);
-		//load_map(game, 0);
-		//map_displayer(game, game->px, game->py, TEX_PLAYER);
 	}
 	if (keycode == A || keycode == RIGHT_ARROW)
 	{
 		ft_printf("%s\n", "LEFT");
 		move_player(game, game->px + 1, game->py);
-		//ft_printf("py = %d px = %d\n", game->py, game->px);
-		//load_map(game, 0);
-		//map_displayer(game, game->px, game->py, TEX_PLAYER);
 	}
 	if (keycode == D || keycode == LEFT_ARROW)
 	{
 		ft_printf("%s\n", "RIGHT");
 		move_player(game, game->px - 1, game->py);
-		//ft_printf("py = %d px = %d\n", game->py, game->px);
-		//load_map(game, 0);
-		//map_displayer(game, game->px, game->py, TEX_PLAYER);
 	}
 	return (0);
 }

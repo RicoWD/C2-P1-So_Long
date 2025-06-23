@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/20 20:35:54 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/22 17:21:08 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,15 @@ int	main(void)
 	t_map	map = {0};
 
 	map.path = "maps/map1.ber";
+	game.ath_path = "maps/ath.ber";
+	game.remaining_p_life = 3;
 	game.map = &map;
 	treatment_map(&map);
 	grid_load(&map);
 	if (window_setup(&game))
-		return (EXIT_FAILURE);
-	load_map(&game, 1);
+	return (EXIT_FAILURE);
+	load_map(&game);
+	load_ath(&game);
 
 	mlx_key_hook(game.win, handle_keypress, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);

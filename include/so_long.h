@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/21 01:14:29 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/06/23 00:18:07 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,19 @@ typedef enum e_tex
 	TEX_PLAYER,
 	TEX_COLLECT,
 	TEX_EXIT,
+	TEX_VILAIN,
+	ATH_TEX_BG,
+	ATH_TEX_HEART,
+	TEX_0,
+	TEX_1,
+	TEX_2,
+	TEX_3,
+	TEX_4,
+	TEX_5,
+	TEX_6,
+	TEX_7,
+	TEX_8,
+	TEX_9,
 	NB_TEX
 }	t_tex;
 
@@ -83,6 +96,8 @@ typedef struct s_game
 	void	*tex[NB_TEX];
 	int		px;
 	int		py;
+	char	*ath_path;
+	int		remaining_p_life;
 	int		moves;
 }				t_game;
 
@@ -93,11 +108,15 @@ void	treatment_map(t_map *map);
 int		symbol_counter(t_map *map, char *line, char symbol);
 int		check_border(t_map *map, char *line, int row);
 int		count_height(t_map *map);
-void	load_map(t_game *game, int trigger);
+void	load_ath(t_game *game);
+void	load_map(t_game *game);
+void	draw_bg(t_game *game, t_tex id);
 int		window_setup(t_game *game);
 void	get_player_init_pos(t_game *game, char *line, int y);
 void	map_displayer(t_game *game, int x, int y, t_tex id);
 int		handle_keypress(int keycode, t_game *game);
 void    grid_load(t_map *map);
+void	update_ath(t_game *game, int x, int y, int color, char *txt);
+
 
 #endif
