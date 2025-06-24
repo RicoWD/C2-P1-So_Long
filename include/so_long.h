@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/24 00:13:22 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/06/24 18:59:25 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef enum e_tex
 	TEX_VILAIN,
 	ATH_TEX_BG,
 	ATH_TEX_HEART,
+	ATH_TEX_COLLECT,
 	TEX_0,
 	TEX_1,
 	TEX_2,
@@ -115,7 +116,7 @@ typedef struct s_game
 void	print_map(const char *path);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		handle_keypress(int keycode, t_game *game);
-void	treatment_map(t_map *map);
+void	treatment_map(t_game *game);
 int		symbol_counter(t_map *map, char *line, char symbol);
 int		check_border(t_map *map, char *line, int row);
 int		count_height(t_map *map);
@@ -130,7 +131,7 @@ void	grid_load(t_map *map);
 void	update_ath(t_game *game, int x, int y, int color, char *txt);
 int		close_window(t_game *game);
 void	textures_init(t_game *game);
-int		is_path_valid(t_game *game);
+int		is_path_solvable(t_game *game);
 
 
 #endif

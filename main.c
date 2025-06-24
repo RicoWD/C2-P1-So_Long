@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/24 01:04:36 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/06/24 19:02:45 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
+	if (!(color & 0xFF))
+		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
@@ -27,22 +29,6 @@ int	close_window(t_game *game)
 	return (0);
 }
 
-// void	texture_fill(t_data *img, int x, int y, int limits_x, int limits_y, int color)
-// {
-// 	int	cur_y;
-
-// 	while (x <= limits_x)
-// 	{
-// 		cur_y = y;
-// 		while (cur_y <= limits_y)
-// 		{
-// 			my_mlx_pixel_put(img, x, cur_y, color);
-// 			cur_y++;
-// 		}
-// 		x++;
-// 	}
-// }
-
 void	level_init(t_game *game)
 {
 	game->lvl[LEVEL1] = "maps/map1.ber";
@@ -50,6 +36,20 @@ void	level_init(t_game *game)
 	game->lvl[LEVEL3] = "maps/map3.ber";
 	game->lvl[NB_LVL] = NULL;
 	game->cur_lvl = LEVEL0;
+}
+
+int	is_map_path_valid(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '.')
+			return (ft_strncmp(s + i, ".ber", 5));
+		i++;
+	}
+	return (-1);
 }
 
 int	main(int ac, char **av)
@@ -63,15 +63,17 @@ int	main(int ac, char **av)
 		game.remaining_p_life = 3;
 		game.map = &map;
 		level_init(&game);
+		if (is_map_path_valid(av[1]))
+			return (ft_printf("Error\nThe file is not a .ber\n"), EXIT_FAILURE);
 		game.map->path = av[1];
-		treatment_map(&map);
+		treatment_map(&game);
 		grid_load(&map);
+		ft_printf("PATH SOLV | %d |\n", is_path_solvable(&game));
+		if (!is_path_solvable(&game))
+			return (ft_printf("Error\nMap not solvable\n"), EXIT_FAILURE);
 		if (window_setup(&game))
 			return (EXIT_FAILURE);
 		load_map(&game);
-		ft_printf("Path | %d |\n", is_path_valid(&game));
-		if (!is_path_valid(&game))
-        	return (ft_printf("Error\nMap not solvable\n"), EXIT_FAILURE);
 		load_ath(&game);
 		mlx_key_hook(game.win, handle_keypress, &game);
 		mlx_hook(game.win, 17, 0, close_window, &game);

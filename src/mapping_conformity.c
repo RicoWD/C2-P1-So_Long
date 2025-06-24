@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapping_conformity.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:56:00 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/22 16:01:49 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/06/24 19:19:56 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,49 +46,51 @@ void	are_symbols_valid(t_map *map)
 			exit(EXIT_SUCCESS), (void)0);
 }
 
-int	map_parsing(t_map *map, int fd, char *line, int row)
+int	map_parsing(t_game *game, int fd, char *line, int row)
 {
 	int		len;
 
 	while (line)
 	{
 		len = ft_strlen(line) - (line[ft_strlen(line) - 1] == '\n');
-		if (map->width == -1)
-			map->width = len;
-		else if (len != map->width)
+		if (game->map->width == -1)
+			game->map->width = len;
+		else if (len != game->map->width)
 			return (free(line), ft_printf("Error\nMap is not rectangular\n"),
 				exit(EXIT_SUCCESS), 0);
-		map->count_p += symbol_counter(map, line, 'P');
-		map->count_e += symbol_counter(map, line, 'E');
-		map->count_c += symbol_counter(map, line, 'C');
-		if (!check_border(map, line, row) || !check_cty(map, line))
+		game->map->count_p += symbol_counter(game->map, line, 'P');
+		game->map->count_e += symbol_counter(game->map, line, 'E');
+		game->map->count_c += symbol_counter(game->map, line, 'C');
+		if (!check_cty(game->map, line))
+			return (free(line), exit(EXIT_SUCCESS), 0);
+		if (!check_border(game->map, line, row))
 			return (ft_printf("Error\nMap is not valid.\n"), free(line), 0);
+		get_player_init_pos(game, line, row);
 		free(line);
 		line = get_next_line(fd);
 		row++;
 	}
-	map->remaining_c = map->count_c;
-	are_symbols_valid(map);
+	game->map->remaining_c = game->map->count_c;
+	are_symbols_valid(game->map);
 	close(fd);
 	return (1);
 }
 
-void	treatment_map(t_map *map)
+void	treatment_map(t_game *game)
 {
 	int		fd;
 	char	*line;
 	int		row;
 
-	map->count_p = 0;
-	map->count_e = 0;
-	map->count_c = 0;
-	map->width = -1;
-	map->height = 0;
-	if (!count_height(map))
+	game->map->count_p = 0;
+	game->map->count_e = 0;
+	game->map->count_c = 0;
+	game->map->width = -1;
+	game->map->height = 0;
+	if (!count_height(game->map))
 		return ;
-	fd = open(map->path, O_RDONLY);
+	fd = open(game->map->path, O_RDONLY);
 	line = get_next_line(fd);
 	row = 0;
-	if (map_parsing(map, fd, line, row))
-		printf("Map can be parsed");
+	map_parsing(game, fd, line, row);
 }

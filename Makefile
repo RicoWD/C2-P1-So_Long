@@ -6,7 +6,7 @@
 #    By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 02:58:34 by erpascua          #+#    #+#              #
-#    Updated: 2025/06/23 15:53:30 by erpascua         ###   ########.fr        #
+#    Updated: 2025/06/24 18:43:52 by erpascua         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ endif
 
 NAME		= 	so_long
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -Iinclude -I./include $(MLX_INC) -I$(LIBFT_DIR)
+CFLAGS		=	-Wall -Wextra -Werror -Iinclude -g -I./include $(MLX_INC) -I$(LIBFT_DIR)
 LDFLAGS		=	$(MLX_LDFLAGS) -L$(LIBFT_DIR) -lft -lm
 RM			=	/bin/rm -f
 
@@ -73,6 +73,9 @@ fclean: clean
 	@echo "✅  Binaries deleted"
 
 re: fclean all
+
+test:
+	valgrind -s --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME) maps/map0.ber
 
 dev: 
 	@make re 1>/dev/null

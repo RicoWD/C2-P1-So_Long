@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flodfill.c                                         :+:      :+:    :+:   */
+/*   path_validity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:00:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/24 00:45:02 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:07:08 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	grid_free(char **grid, int h)
 {
 	int	i;
-	
+
 	if (!grid)
 		return ;
 	i = 0;
@@ -60,7 +60,7 @@ static void	fill(char **grid, int h, int w, int y, int x)
 	fill(grid, h, w, y, x + 1);
 }
 
-int	is_path_valid(t_game *game)
+int	is_path_solvable(t_game *game)
 {
 	char	**tmp;
 	int		y;

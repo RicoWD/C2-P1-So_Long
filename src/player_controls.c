@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 20:36:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/23 17:29:34 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/24 11:39:22 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,33 +35,33 @@ void	destroy_level(t_game *game)
 	}
 }
 
-int	next_level(t_game *game)
-{
-	game->cur_lvl++;
-	printf("LEVEL %d", game->cur_lvl);
-	if (game->lvl[game->cur_lvl] == NULL)
-	{
-		ft_printf("✅ All level completed... Nice work! ✅\n");
-		close_window(game);
-		return (0);
-	}
-	destroy_level(game);
-	game->map->path = game->lvl[game->cur_lvl];
-	treatment_map(game->map);
-	mlx_destroy_window(game->mlx, game->win);
-	game->win = mlx_new_window(game->mlx,
-			game->map->width * TILE,
-			(game->map->height + 1) * TILE, "so_long");
-	game->remaining_p_life = 3;
-	game->map->remaining_c = game->map->count_c;
-	game->moves = 0;
-	textures_init(game);
-	load_map(game);
-	load_ath(game);
-	mlx_key_hook(game->win, handle_keypress, game);
-	mlx_hook(game->win, 17, 0, close_window, game);
-	return (0);
-}
+// int	next_level(t_game *game)
+// {
+// 	game->cur_lvl++;
+// 	printf("LEVEL %d", game->cur_lvl);
+// 	if (game->lvl[game->cur_lvl] == NULL)
+// 	{
+// 		ft_printf("✅ All level completed... Nice work! ✅\n");
+// 		close_window(game);
+// 		return (0);
+// 	}
+// 	destroy_level(game);
+// 	game->map->path = game->lvl[game->cur_lvl];
+// 	treatment_map(game->map);
+// 	mlx_destroy_window(game->mlx, game->win);
+// 	game->win = mlx_new_window(game->mlx,
+// 			game->map->width * TILE,
+// 			(game->map->height + 1) * TILE, "so_long");
+// 	game->remaining_p_life = 3;
+// 	game->map->remaining_c = game->map->count_c;
+// 	game->moves = 0;
+// 	textures_init(game);
+// 	load_map(game);
+// 	load_ath(game);
+// 	mlx_key_hook(game->win, handle_keypress, game);
+// 	mlx_hook(game->win, 17, 0, close_window, game);
+// 	return (0);
+// }
 
 void	move_player(t_game *game, int new_x, int new_y)
 {
@@ -94,7 +94,7 @@ void	move_player(t_game *game, int new_x, int new_y)
 	if (game->map->grid[new_y][new_x] == 'E' && game->map->remaining_c > 0)
 		ft_printf("Not yet... You still have %d items to collect\n", game->map->remaining_c);
 	if (game->map->grid[new_y][new_x] == 'E' && game->map->remaining_c == 0)
-		next_level(game);
+		close_window(game);
 }
 
 int	handle_keypress(int keycode, t_game *game)

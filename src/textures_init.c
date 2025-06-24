@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:44:37 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/23 15:42:21 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/24 19:23:33 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	draw_bg(t_game *game, t_tex id)
 	int		x;
 
 	y = 0;
-	while (y < game->map->height)
+	(void)id;
+	while (y < game->map->height * TILE)
 	{
 		x = 0;
-		while (x < game->map->width)
+		while (x < game->map->width * TILE)
 		{
 			map_displayer(game, x, y, id);
 			x++;
@@ -43,9 +44,8 @@ void	draw_map(t_game *game, char *line, int y)
 	x = 0;
 	while (x < game->map->width)
 	{
-		if (line[x] == '0')
-			map_displayer(game, x, y, TEX_FLOOR);
-		else if (line[x] == '1')
+		map_displayer(game, x, y, TEX_FLOOR);
+		if (line[x] == '1')
 			map_displayer(game, x, y, TEX_WALL);
 		else if (line[x] == 'E')
 			map_displayer(game, x, y, TEX_EXIT);
@@ -106,6 +106,8 @@ void	textures_init(t_game *game)
 	game->tex[TEX_EXIT] = load_xpm(game->mlx, "textures/exit.xpm");
 	game->tex[ATH_TEX_BG] = load_xpm(game->mlx, "textures/ath_bg.xpm");
 	game->tex[ATH_TEX_HEART] = load_xpm(game->mlx, "textures/heart.xpm");
+	game->tex[ATH_TEX_COLLECT] = load_xpm(game->mlx,
+			"textures/ath_collect.xpm");
 	game->tex[TEX_0] = load_xpm(game->mlx, "textures/alphanum/0.xpm");
 	game->tex[TEX_1] = load_xpm(game->mlx, "textures/alphanum/1.xpm");
 	game->tex[TEX_2] = load_xpm(game->mlx, "textures/alphanum/2.xpm");
@@ -132,7 +134,7 @@ void	load_map(t_game *game)
 	if (!line)
 		return (perror("open"));
 	textures_init(game);
-	draw_bg(game, TEX_WALL);
+	// draw_bg(game, TEX_WALL);
 	row = 0;
 	while (line)
 	{

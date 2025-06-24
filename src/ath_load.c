@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:18:20 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/06/23 14:29:42 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/24 13:47:00 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	draw_ath(t_game *game, char *row)
 			// x += (int)ft_strlen(row) - 1;
 		}
 		else if (row[x] == 'C')
-			map_displayer(game, x, y, TEX_COLLECT);
+			map_displayer(game, x, y, ATH_TEX_COLLECT);
 		else if (row[x] == 'm' )
 		{
 			draw_number(game, game->moves, x, y);
