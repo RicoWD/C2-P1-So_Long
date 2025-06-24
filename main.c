@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/23 17:50:13 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/24 01:04:36 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int	main(int ac, char **av)
 		if (window_setup(&game))
 			return (EXIT_FAILURE);
 		load_map(&game);
+		ft_printf("Path | %d |\n", is_path_valid(&game));
+		if (!is_path_valid(&game))
+        	return (ft_printf("Error\nMap not solvable\n"), EXIT_FAILURE);
 		load_ath(&game);
 		mlx_key_hook(game.win, handle_keypress, &game);
 		mlx_hook(game.win, 17, 0, close_window, &game);

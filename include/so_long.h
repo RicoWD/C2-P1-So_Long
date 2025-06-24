@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/23 17:49:34 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/24 00:13:22 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void	grid_load(t_map *map);
 void	update_ath(t_game *game, int x, int y, int color, char *txt);
 int		close_window(t_game *game);
 void	textures_init(t_game *game);
+int		is_path_valid(t_game *game);
 
 
 #endif
