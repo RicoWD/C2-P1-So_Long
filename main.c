@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/24 19:02:45 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:43:37 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ int	main(int ac, char **av)
 		game.map->path = av[1];
 		treatment_map(&game);
 		grid_load(&map);
-		ft_printf("PATH SOLV | %d |\n", is_path_solvable(&game));
 		if (!is_path_solvable(&game))
 			return (ft_printf("Error\nMap not solvable\n"), EXIT_FAILURE);
 		if (window_setup(&game))
 			return (EXIT_FAILURE);
+		textures_init(&game);
 		load_map(&game);
 		load_ath(&game);
 		mlx_key_hook(game.win, handle_keypress, &game);

@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 19:28:28 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/24 20:12:10 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:02:19 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 // 	int w, h;
 // 	mlx_get_screen_size(mlx_ptr, &w, &h);
 // }
+
+
 
 // void	textures_init(t_game *game)
 // {

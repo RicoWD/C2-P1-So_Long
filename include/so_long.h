@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/24 18:59:25 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:26:24 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@
 #  define KEY_ESC 65307
 # endif
 
-# define TILE 64
+# ifndef TILE
+#  define TILE 32
+# endif
 
 # define W 119
 # define S 115
@@ -103,6 +105,7 @@ typedef struct s_game
 	t_map	*map;
 	void	*mlx;
 	void	*win;
+	int		tile;
 	void	*tex[NB_TEX];
 	void	*lvl[NB_LVL + 1];
 	int		cur_lvl;
@@ -132,6 +135,5 @@ void	update_ath(t_game *game, int x, int y, int color, char *txt);
 int		close_window(t_game *game);
 void	textures_init(t_game *game);
 int		is_path_solvable(t_game *game);
-
 
 #endif

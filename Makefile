@@ -6,7 +6,7 @@
 #    By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 02:58:34 by erpascua          #+#    #+#              #
-#    Updated: 2025/06/24 18:43:52 by erpascua         ###   ########.fr        #
+#    Updated: 2025/06/26 14:56:20 by erpascua         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,10 @@ endif
 
 NAME		= 	so_long
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -Iinclude -g -I./include $(MLX_INC) -I$(LIBFT_DIR)
+CFLAGS		=	-Wall -Wextra -Werror -Iinclude -g -I./include $(MLX_INC) -I$(LIBFT_DIR) -DTILE=$(TILE)
 LDFLAGS		=	$(MLX_LDFLAGS) -L$(LIBFT_DIR) -lft -lm
 RM			=	/bin/rm -f
-
+TILE		?=	64
 LIBFT_DIR	=	libft
 LIBFT_A		=	$(LIBFT_DIR)/libft.a
 LIBFT_SRC	=	$(wildcard $(LIBFT_DIR)/*.c)
