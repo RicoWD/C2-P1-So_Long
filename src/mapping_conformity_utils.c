@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/20 19:38:09 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/27 18:58:06 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,35 +28,33 @@ int	symbol_counter(t_map *map, char *line, char symbol)
 	return (n);
 }
 
-int	check_border(t_map *map, char *line, int row)
+static int	check_border(t_map *map, char *line, int row)
 {
-    int	col;
+	int	col;
 
-    col = 0;
-    while (col < map->width)
-    {
-        if (row == 0 || row == map->height - 1)
-        {
-            if (line[col] != '1')
-            {
-                ft_printf("Error\nChar '%c' is not a '1' (wall)\n", line[col]);
-                return (0);
-            }
-        }
-        else
-        {
-            if (col == 0 || col == map->width - 1)
-            {
-                if (line[col] != '1')
-                {
-                    ft_printf("Error\nChar '%c' is not a '1' (wall)\n", line[col]);
-                    return (0);
-                }
-            }
-        }
-        col++;
-    }
-    return (1);
+	col = 0;
+	while (col < map->width)
+	{
+		if (row == 0 || row == map->height - 1)
+		{
+			if (line[col] != '1')
+			{
+				ft_printf("Error\nChar '%c' is not a '1' (wall)\n", line[col]);
+				return (0);
+			}
+		}
+		else
+		{
+			if (col == 0 || col == map->width - 1)
+			{
+				if (line[col] != '1')
+					return (ft_printf("Error\nChar '%c' is not a '1' (wall)\n",
+							line[col]), (0));
+			}
+		}
+		col++;
+	}
+	return (1);
 }
 
 int	count_height(t_map *map)

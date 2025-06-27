@@ -6,16 +6,11 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:18:20 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/06/24 13:47:00 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:13:03 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
-
-// void	update_ath(t_game *game, int x, int y, int color, char *txt)
-// {
-// 	mlx_string_put(game->mlx, game->win, x, y, color, txt);
-// }
 
 void	num_to_xpm(t_game *game, int nb, int x, int y)
 {
@@ -56,6 +51,29 @@ static void	draw_number(t_game *game, int value, int x, int y)
 	free(s);
 }
 
+static void	draw_map_per_pxl(t_game *game, char *line, int x, int y)
+{
+	if (pxl == 'S')
+		map_displayer(game, x, y, ATH_TEX_BG);
+	else if (pxl == 'h')
+		draw_number(game, game->remaining_p_life, x, y);
+	else if (pxl == 'H')
+		map_displayer(game, x, y, ATH_TEX_LIFE);
+	else if (pxl == 'P')
+		map_displayer(game, x, y, ATH_TEX_PLAYER);
+	else if (pxl == 'c')
+		draw_number(game, game->map->remaining_c, x, y);
+	else if (pxl == 'C')
+		map_displayer(game, x, y, ATH_TEX_COLLECT);
+	else if (pxl == 'm' )
+	{
+		draw_number(game, game->moves, x, y);
+		x += (int)ft_strlen(&pxl) - 1;
+	}
+	else if (pxl == 'M')
+		map_displayer(game, x, y, ATH_TEX_MOVE);
+}
+
 static void	draw_ath(t_game *game, char *row)
 {
 	int	y;
@@ -65,40 +83,16 @@ static void	draw_ath(t_game *game, char *row)
 	x = 0;
 	while (x < game->map->width)
 		map_displayer(game, x++, y, ATH_TEX_BG);
-    x = 0;
+	x = 0;
 	while (row[x] && x < game->map->width)
 	{
-		if (row[x] == 'S')
-			map_displayer(game, x, y, ATH_TEX_BG);
-		else if (row[x] == 'h')
-		{
-			draw_number(game, game->remaining_p_life, x, y);
-			// x += (int)ft_strlen(row) - 1;
-		}
-		else if (row[x] == 'H')
-			map_displayer(game, x, y, ATH_TEX_HEART);
-		else if (row[x] == 'P')
-			map_displayer(game, x, y, TEX_PLAYER);
-		else if (row[x] == 'c')
-		{
-			draw_number(game, game->map->remaining_c, x, y);
-			// x += (int)ft_strlen(row) - 1;
-		}
-		else if (row[x] == 'C')
-			map_displayer(game, x, y, ATH_TEX_COLLECT);
-		else if (row[x] == 'm' )
-		{
-			draw_number(game, game->moves, x, y);
-			x += (int)ft_strlen(row) - 1;
-		}
-		else if (row[x] == 'M')
-			map_displayer(game, x, y, TEX_COLLECT);
-        x++;
+		draw_map_per_pxl(game, line, x, y);
+		x++;
 	}
 }
 
 
-void load_ath(t_game *g)
+void	load_ath(t_game *g)
 {
 	int		fd;
 	char	*line;

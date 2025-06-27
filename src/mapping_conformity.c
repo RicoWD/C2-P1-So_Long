@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:56:00 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/24 19:19:56 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/27 18:56:26 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	map_parsing(t_game *game, int fd, char *line, int row)
 		if (!check_cty(game->map, line))
 			return (free(line), exit(EXIT_SUCCESS), 0);
 		if (!check_border(game->map, line, row))
-			return (ft_printf("Error\nMap is not valid.\n"), free(line), 0);
+			return (free(line), ft_printf("Error\nMap is not valid.\n"), 0);
 		get_player_init_pos(game, line, row);
 		free(line);
 		line = get_next_line(fd);

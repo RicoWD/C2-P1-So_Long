@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/26 17:43:37 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/27 10:35:40 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,6 @@ int	close_window(t_game *game)
 	return (0);
 }
 
-void	level_init(t_game *game)
-{
-	game->lvl[LEVEL1] = "maps/map1.ber";
-	game->lvl[LEVEL2] = "maps/map2.ber";
-	game->lvl[LEVEL3] = "maps/map3.ber";
-	game->lvl[NB_LVL] = NULL;
-	game->cur_lvl = LEVEL0;
-}
 
 int	is_map_path_valid(char *s)
 {
@@ -62,7 +54,6 @@ int	main(int ac, char **av)
 		game.ath_path = "maps/ath.ber";
 		game.remaining_p_life = 3;
 		game.map = &map;
-		level_init(&game);
 		if (is_map_path_valid(av[1]))
 			return (ft_printf("Error\nThe file is not a .ber\n"), EXIT_FAILURE);
 		game.map->path = av[1];

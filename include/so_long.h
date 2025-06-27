@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/26 17:26:24 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:31:58 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,18 @@ typedef enum e_tex
 	TEX_FLOOR,
 	TEX_WALL,
 	TEX_PLAYER,
+	TEX_PLAYER_LEFT,
+	TEX_PLAYER_RIGHT,
+	TEX_PLAYER_FRONT,
+	TEX_PLAYER_BACK,
 	TEX_COLLECT,
 	TEX_EXIT,
 	TEX_VILAIN,
 	ATH_TEX_BG,
-	ATH_TEX_HEART,
+	ATH_TEX_PLAYER,
+	ATH_TEX_LIFE,
 	ATH_TEX_COLLECT,
+	ATH_TEX_MOVE,
 	TEX_0,
 	TEX_1,
 	TEX_2,
@@ -61,15 +67,6 @@ typedef enum e_tex
 	TEX_9,
 	NB_TEX
 }	t_tex;
-
-typedef enum e_lvl
-{
-	LEVEL0,
-	LEVEL1,
-	LEVEL2,
-	LEVEL3,
-	NB_LVL
-}	t_lvl;
 
 typedef struct s_positions
 {
@@ -107,7 +104,6 @@ typedef struct s_game
 	void	*win;
 	int		tile;
 	void	*tex[NB_TEX];
-	void	*lvl[NB_LVL + 1];
 	int		cur_lvl;
 	int		px;
 	int		py;
@@ -120,8 +116,6 @@ void	print_map(const char *path);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		handle_keypress(int keycode, t_game *game);
 void	treatment_map(t_game *game);
-int		symbol_counter(t_map *map, char *line, char symbol);
-int		check_border(t_map *map, char *line, int row);
 int		count_height(t_map *map);
 void	load_ath(t_game *game);
 void	load_map(t_game *game);

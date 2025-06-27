@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:44:37 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/26 17:42:54 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:42:28 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	draw_player(t_game *game, char *line, int y)
 	while (x < game->map->width)
 	{
 		if (line[x] == 'P')
-			map_displayer(game, x, y, TEX_PLAYER);
+			map_displayer(game, x, y, TEX_PLAYER_FRONT);
 		x++;
 	}
 }
@@ -95,30 +95,6 @@ void	*load_xpm(void *mlx, const char *path)
 	}
 	return (img);
 }
-
-// void	textures_init(t_game *game)
-// {
-// 	game->tex[TEX_WALL] = load_xpm(game->mlx, "textures/wall.xpm");
-// 	game->tex[TEX_FLOOR] = load_xpm(game->mlx, "textures/floor.xpm");
-// 	game->tex[TEX_PLAYER] = load_xpm(game->mlx, "textures/player.xpm");
-// 	game->tex[TEX_COLLECT] = load_xpm(game->mlx, "textures/collect.xpm");
-// 	game->tex[TEX_VILAIN] = load_xpm(game->mlx, "textures/vilain.xpm");
-// 	game->tex[TEX_EXIT] = load_xpm(game->mlx, "textures/exit.xpm");
-// 	game->tex[ATH_TEX_BG] = load_xpm(game->mlx, "textures/ath_bg.xpm");
-// 	game->tex[ATH_TEX_HEART] = load_xpm(game->mlx, "textures/heart.xpm");
-// 	game->tex[ATH_TEX_COLLECT] = load_xpm(game->mlx,
-// 			"textures/ath_collect.xpm");
-// 	game->tex[TEX_0] = load_xpm(game->mlx, "textures/alphanum/0.xpm");
-// 	game->tex[TEX_1] = load_xpm(game->mlx, "textures/alphanum/1.xpm");
-// 	game->tex[TEX_2] = load_xpm(game->mlx, "textures/alphanum/2.xpm");
-// 	game->tex[TEX_3] = load_xpm(game->mlx, "textures/alphanum/3.xpm");
-// 	game->tex[TEX_4] = load_xpm(game->mlx, "textures/alphanum/4.xpm");
-// 	game->tex[TEX_5] = load_xpm(game->mlx, "textures/alphanum/5.xpm");
-// 	game->tex[TEX_6] = load_xpm(game->mlx, "textures/alphanum/6.xpm");
-// 	game->tex[TEX_7] = load_xpm(game->mlx, "textures/alphanum/7.xpm");
-// 	game->tex[TEX_8] = load_xpm(game->mlx, "textures/alphanum/8.xpm");
-// 	game->tex[TEX_9] = load_xpm(game->mlx, "textures/alphanum/9.xpm");
-// }
 
 void	load_map(t_game *game)
 {
