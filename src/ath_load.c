@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ath_load.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:18:20 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/06/27 19:13:03 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/30 23:22:26 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,24 @@ static void	draw_number(t_game *game, int value, int x, int y)
 
 static void	draw_map_per_pxl(t_game *game, char *line, int x, int y)
 {
-	if (pxl == 'S')
+	if (line[x] == 'S')
 		map_displayer(game, x, y, ATH_TEX_BG);
-	else if (pxl == 'h')
+	else if (line[x] == 'h')
 		draw_number(game, game->remaining_p_life, x, y);
-	else if (pxl == 'H')
+	else if (line[x] == 'H')
 		map_displayer(game, x, y, ATH_TEX_LIFE);
-	else if (pxl == 'P')
+	else if (line[x] == 'P')
 		map_displayer(game, x, y, ATH_TEX_PLAYER);
-	else if (pxl == 'c')
+	else if (line[x] == 'c')
 		draw_number(game, game->map->remaining_c, x, y);
-	else if (pxl == 'C')
+	else if (line[x] == 'C')
 		map_displayer(game, x, y, ATH_TEX_COLLECT);
-	else if (pxl == 'm' )
+	else if (line[x] == 'm' )
 	{
 		draw_number(game, game->moves, x, y);
-		x += (int)ft_strlen(&pxl) - 1;
+		x += (int)ft_strlen(line) - 1;
 	}
-	else if (pxl == 'M')
+	else if (line[x] == 'M')
 		map_displayer(game, x, y, ATH_TEX_MOVE);
 }
 
@@ -86,7 +86,7 @@ static void	draw_ath(t_game *game, char *row)
 	x = 0;
 	while (row[x] && x < game->map->width)
 	{
-		draw_map_per_pxl(game, line, x, y);
+		draw_map_per_pxl(game, row, x, y);
 		x++;
 	}
 }

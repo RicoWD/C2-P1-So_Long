@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapping_conformity_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/27 18:58:06 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/06/30 23:26:26 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	symbol_counter(t_map *map, char *line, char symbol)
 	return (n);
 }
 
-static int	check_border(t_map *map, char *line, int row)
+int	check_border(t_map *map, char *line, int row)
 {
 	int	col;
 
