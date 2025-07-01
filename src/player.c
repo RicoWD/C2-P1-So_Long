@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 19:35:43 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/20 20:14:47 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/01 05:57:35 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	get_player_init_pos(t_game *game, char *line, int y)
+void	get_player_init_pos(t_game *g, char *line, int y)
 {
 	int	x;
 
@@ -21,11 +21,9 @@ void	get_player_init_pos(t_game *game, char *line, int y)
 	{
 		if (line[x] == 'P')
 		{
-			game->px = x;
-			game->py = y;
+			g->px = x;
+			g->py = y;
 		}
 		x++;
 	}
 }
-
-

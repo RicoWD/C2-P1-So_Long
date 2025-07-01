@@ -6,11 +6,18 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/30 23:26:26 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/01 05:56:15 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	symbol_increment(t_game *g, char *line)
+{
+	g->map->count_p += symbol_counter(g->map, line, 'P');
+	g->map->count_e += symbol_counter(g->map, line, 'E');
+	g->map->count_c += symbol_counter(g->map, line, 'C');
+}
 
 int	symbol_counter(t_map *map, char *line, char symbol)
 {
@@ -26,6 +33,19 @@ int	symbol_counter(t_map *map, char *line, char symbol)
 		col++;
 	}
 	return (n);
+}
+
+void	are_symbols_valid(t_map *map)
+{
+	if (map->count_p != 1)
+		return (ft_printf("Error\nOne player needed.\n"),
+			exit(EXIT_SUCCESS), (void)0);
+	if (map->count_e != 1)
+		return (ft_printf("Error\nOne exit needed.\n"),
+			exit(EXIT_SUCCESS), (void)0);
+	if (map->count_c < 1)
+		return (ft_printf("Error\nAt least 1 collectible needed.\n"),
+			exit(EXIT_SUCCESS), (void)0);
 }
 
 int	check_border(t_map *map, char *line, int row)

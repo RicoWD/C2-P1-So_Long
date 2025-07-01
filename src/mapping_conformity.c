@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapping_conformity.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:56:00 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/27 18:56:26 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/01 05:59:13 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	is_allowed(char c)
 {
-	return (c == '0' || c == '1' || c == 'C' || c == 'E' ||
-		c == 'P' || c == 'V');
+	return (c == '0' || c == '1' || c == 'C' || c == 'E'
+		|| c == 'P' || c == 'V');
 }
 
 int	check_cty(t_map *map, char *line)
@@ -33,64 +33,59 @@ int	check_cty(t_map *map, char *line)
 	return (1);
 }
 
-void	are_symbols_valid(t_map *map)
+size_t	strlen_nl(const char *s)
 {
-	if (map->count_p != 1)
-		return (ft_printf("Error\nOne player needed.\n"),
-			exit(EXIT_SUCCESS), (void)0);
-	if (map->count_e != 1)
-		return (ft_printf("Error\nOne exit needed.\n"),
-			exit(EXIT_SUCCESS), (void)0);
-	if (map->count_c < 1)
-		return (ft_printf("Error\nAt least 1 collectible needed.\n"),
-			exit(EXIT_SUCCESS), (void)0);
+	size_t	i;
+
+	i = 0;
+	while (s[i] && s[i] != '\n')
+		i++;
+	return (i);
 }
 
-int	map_parsing(t_game *game, int fd, char *line, int row)
+int	map_parsing(t_game *g, int fd, char *line, int row)
 {
-	int		len;
+	int	len;
 
 	while (line)
 	{
-		len = ft_strlen(line) - (line[ft_strlen(line) - 1] == '\n');
-		if (game->map->width == -1)
-			game->map->width = len;
-		else if (len != game->map->width)
+		len = strlen_nl(line);
+		if (g->map->width == -1)
+			g->map->width = len;
+		else if (len != g->map->width)
 			return (free(line), ft_printf("Error\nMap is not rectangular\n"),
 				exit(EXIT_SUCCESS), 0);
-		game->map->count_p += symbol_counter(game->map, line, 'P');
-		game->map->count_e += symbol_counter(game->map, line, 'E');
-		game->map->count_c += symbol_counter(game->map, line, 'C');
-		if (!check_cty(game->map, line))
+		symbol_increment(g, line);
+		if (!check_cty(g->map, line))
 			return (free(line), exit(EXIT_SUCCESS), 0);
-		if (!check_border(game->map, line, row))
+		if (!check_border(g->map, line, row))
 			return (free(line), ft_printf("Error\nMap is not valid.\n"), 0);
-		get_player_init_pos(game, line, row);
+		get_player_init_pos(g, line, row);
 		free(line);
 		line = get_next_line(fd);
 		row++;
 	}
-	game->map->remaining_c = game->map->count_c;
-	are_symbols_valid(game->map);
+	g->map->remaining_c = g->map->count_c;
+	are_symbols_valid(g->map);
 	close(fd);
 	return (1);
 }
 
-void	treatment_map(t_game *game)
+void	treatment_map(t_game *g)
 {
 	int		fd;
 	char	*line;
 	int		row;
 
-	game->map->count_p = 0;
-	game->map->count_e = 0;
-	game->map->count_c = 0;
-	game->map->width = -1;
-	game->map->height = 0;
-	if (!count_height(game->map))
+	g->map->count_p = 0;
+	g->map->count_e = 0;
+	g->map->count_c = 0;
+	g->map->width = -1;
+	g->map->height = 0;
+	if (!count_height(g->map))
 		return ;
-	fd = open(game->map->path, O_RDONLY);
+	fd = open(g->map->path, O_RDONLY);
 	line = get_next_line(fd);
 	row = 0;
-	map_parsing(game, fd, line, row);
+	map_parsing(g, fd, line, row);
 }

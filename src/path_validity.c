@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_validity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:00:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/24 15:07:08 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/01 05:56:52 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**grid_dup(char **src, int h)
 		return (NULL);
 	i = 0;
 	while (i < h)
-	{		
+	{
 		dst[i] = ft_strdup(src[i]);
 		if (!dst[i])
 			return (grid_free(dst, i), (NULL));
@@ -47,41 +47,41 @@ char	**grid_dup(char **src, int h)
 	return (dst);
 }
 
-static void	fill(char **grid, int h, int w, int y, int x)
+static void	fill(char **grid, t_map *map, int y, int x)
 {
-	if (y < 0 || y >= h || x < 0 || x >= w)
+	if (y < 0 || y >= map->height || x < 0 || x >= map->width)
 		return ;
 	if (grid[y][x] == '1' || grid[y][x] == 'V' || grid[y][x] == 'F')
 		return ;
 	grid[y][x] = 'F';
-	fill(grid, h, w, y - 1, x);
-	fill(grid, h, w, y + 1, x);
-	fill(grid, h, w, y, x - 1);
-	fill(grid, h, w, y, x + 1);
+	fill(grid, map, y - 1, x);
+	fill(grid, map, y + 1, x);
+	fill(grid, map, y, x - 1);
+	fill(grid, map, y, x + 1);
 }
 
-int	is_path_solvable(t_game *game)
+int	is_path_solvable(t_game *g)
 {
 	char	**tmp;
 	int		y;
 	int		x;
 
-	tmp = grid_dup(game->map->grid, game->map->height);
+	tmp = grid_dup(g->map->grid, g->map->height);
 	if (!tmp)
 		return (0);
-	fill(tmp, game->map->height, game->map->width, game->py, game->px);
+	fill(tmp, g->map, g->py, g->px);
 	y = 0;
-	while (y < game->map->height)
+	while (y < g->map->height)
 	{
 		x = 0;
-		while (x < game->map->width)
+		while (x < g->map->width)
 		{
 			if (tmp[y][x] == 'C' || tmp[y][x] == 'E')
-				return (grid_free(tmp, game->map->height), 0);
+				return (grid_free(tmp, g->map->height), 0);
 			x++;
 		}
 		y++;
 	}
-	grid_free(tmp, game->map->height);
+	grid_free(tmp, g->map->height);
 	return (1);
 }

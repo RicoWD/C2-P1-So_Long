@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/27 10:35:40 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/01 05:58:07 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	close_window(t_game *game)
+int	close_window(t_game *g)
 {
-	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_window(g->mlx, g->win);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
-
 
 int	is_map_path_valid(char *s)
 {
@@ -44,31 +43,40 @@ int	is_map_path_valid(char *s)
 	return (-1);
 }
 
+int	game_launch_checks(t_game *g, char *path)
+{
+	if (is_map_path_valid(path))
+		return (ft_printf("Error\nThe file is not a .ber\n"), EXIT_FAILURE);
+	g->map->path = path;
+	treatment_map(g);
+	grid_load(g->map);
+	if (!is_path_solvable(g))
+		return (ft_printf("Error\nMap not solvable\n"), EXIT_FAILURE);
+	g->ath_cols = get_ath_cols(g->ath_path);
+	if (window_setup(g))
+		return (EXIT_FAILURE);
+	textures_init(g);
+	load_map(g);
+	load_ath(g);
+	mlx_key_hook(g->win, handle_keypress, g);
+	mlx_hook(g->win, 17, 0, close_window, g);
+	mlx_loop(g->mlx);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
-	t_game	game = {0};
-	t_map	map = {0};
+	t_game	game;
+	t_map	map;
 
+	ft_memset(&game, 0, sizeof(t_game));
+	ft_memset(&map, 0, sizeof(t_map));
 	if (ac == 2)
 	{
 		game.ath_path = "maps/ath.ber";
 		game.remaining_p_life = 3;
 		game.map = &map;
-		if (is_map_path_valid(av[1]))
-			return (ft_printf("Error\nThe file is not a .ber\n"), EXIT_FAILURE);
-		game.map->path = av[1];
-		treatment_map(&game);
-		grid_load(&map);
-		if (!is_path_solvable(&game))
-			return (ft_printf("Error\nMap not solvable\n"), EXIT_FAILURE);
-		if (window_setup(&game))
-			return (EXIT_FAILURE);
-		textures_init(&game);
-		load_map(&game);
-		load_ath(&game);
-		mlx_key_hook(game.win, handle_keypress, &game);
-		mlx_hook(game.win, 17, 0, close_window, &game);
-		mlx_loop(game.mlx);
+		game_launch_checks(&game, av[1]);
 	}
 	return (0);
 }

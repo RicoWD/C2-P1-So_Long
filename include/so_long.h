@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/30 23:37:24 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/01 08:29:01 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # ifndef TILE
 #  define TILE 32
 # endif
+# define TILE_MIN 8
+# define ATH_ROWS 1
 
 # define W 119
 # define S 115
@@ -85,6 +87,18 @@ typedef struct s_data
 	int		endian;
 }				t_data;
 
+typedef struct s_scale
+{
+	char	*src;
+	char	*dst;
+	int		line_size_s;
+	int		line_size_d;
+	int		bits_per_pxl_s;
+	int		bits_per_pxl_d;
+	double	ratio_x;
+	double	ratio_y;
+}				t_scale;
+
 typedef struct s_map
 {
 	char	**grid;
@@ -102,34 +116,47 @@ typedef struct s_game
 	t_map	*map;
 	void	*mlx;
 	void	*win;
+	int		win_w;
+	int		win_h;
 	int		tile;
 	void	*tex[NB_TEX];
 	int		cur_lvl;
 	int		px;
 	int		py;
 	char	*ath_path;
+	int		ath_cols;
 	int		remaining_p_life;
 	int		moves;
 }				t_game;
 
 void	print_map(const char *path);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		handle_keypress(int keycode, t_game *game);
-void	treatment_map(t_game *game);
+int		handle_keypress(int keycode, t_game *g);
+void	treatment_map(t_game *g);
 int		count_height(t_map *map);
-void	load_ath(t_game *game);
-void	load_map(t_game *game);
-void	draw_bg(t_game *game, t_tex id);
-int		window_setup(t_game *game);
-void	get_player_init_pos(t_game *game, char *line, int y);
-void	map_displayer(t_game *game, int x, int y, t_tex id);
-int		handle_keypress(int keycode, t_game *game);
+void	load_ath(t_game *g);
+void	load_map(t_game *g);
+void	load_tex(t_game *g, int id, const char *file);
+int		window_setup(t_game *g);
+void	get_player_init_pos(t_game *g, char *line, int y);
+void	map_displayer(t_game *g, int x, int y, t_tex id);
+int		handle_keypress(int keycode, t_game *g);
 void	grid_load(t_map *map);
-void	update_ath(t_game *game, int x, int y, int color, char *txt);
-int		close_window(t_game *game);
-void	textures_init(t_game *game);
-int		is_path_solvable(t_game *game);
-int		symbol_counter(t_map *map, char *line, char symbol);
+int		close_window(t_game *g);
+void	textures_init(t_game *g);
+int		is_path_solvable(t_game *g);
 int		check_border(t_map *map, char *line, int row);
+void	draw_bg(t_game *g, t_tex id);
+void	draw_map(t_game *g, char *line, int y);
+void	draw_collect(t_game *g, char *line, int y);
+void	draw_player(t_game *g, char *line, int y);
+void	draw_map_per_pxl(t_game *g, char *row, int *x, int y);
+void	draw_ath(t_game *g, char *row);
+int		symbol_counter(t_map *map, char *line, char symbol);
+void	symbol_increment(t_game *g, char *line);
+void	are_symbols_valid(t_map *map);
+int		get_ath_cols(const char *path);
+void	num_to_xpm(t_game *g, int nb, int x, int y);
+void	draw_map_per_pxl(t_game *g, char *row, int *x, int y);
 
 #endif
