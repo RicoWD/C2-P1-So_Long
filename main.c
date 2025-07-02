@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/01 05:58:07 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/01 12:44:08 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	close_window(t_game *g)
-{
-	mlx_destroy_window(g->mlx, g->win);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
+
 
 int	is_map_path_valid(char *s)
 {

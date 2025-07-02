@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/01 08:29:01 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/02 03:42:46 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,9 @@ void	are_symbols_valid(t_map *map);
 int		get_ath_cols(const char *path);
 void	num_to_xpm(t_game *g, int nb, int x, int y);
 void	draw_map_per_pxl(t_game *g, char *row, int *x, int y);
+void	destroy_level(t_game *g);
+void	destroy_game(t_game *g);
+void	grid_free(char **grid, int h);
+
 
 #endif

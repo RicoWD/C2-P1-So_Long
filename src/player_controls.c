@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 20:36:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/01 06:00:18 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/01 12:45:29 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,7 @@ void	level_reset(t_game *g)
 	load_ath(g);
 }
 
-void	destroy_level(t_game *g)
-{
-	int	i;
 
-	i = 0;
-	while (i < NB_TEX)
-	{
-		if (g->tex[i])
-		{
-			mlx_destroy_image(g->mlx, g->tex[i]);
-			g->tex[i] = NULL;
-		}
-		i++;
-	}
-}
 
 static void	update_player_pos(t_game *g, int new_x, int new_y, int tex)
 {
