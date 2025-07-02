@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapping_conformity.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:56:00 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/01 05:59:13 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/02 14:49:46 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ static int	is_allowed(char c)
 		|| c == 'P' || c == 'V');
 }
 
-int	check_cty(t_map *map, char *line)
+int	check_cty(t_game *g, char *line)
 {
 	int	col;
 
 	col = 0;
-	while (col < map->width)
+	while (col < g->map->width)
 	{
 		if (!is_allowed(line[col]))
 			return (ft_printf("Error\nchar '%c' is not valid.\n",
-					line[col]), (0));
+					line[col]), close_window(g), 0);
 		col++;
 	}
 	return (1);
@@ -53,13 +53,12 @@ int	map_parsing(t_game *g, int fd, char *line, int row)
 		if (g->map->width == -1)
 			g->map->width = len;
 		else if (len != g->map->width)
-			return (free(line), ft_printf("Error\nMap is not rectangular\n"),
-				exit(EXIT_SUCCESS), 0);
+			return (parse_error(g, fd, line, "Map is not rectangular"));
 		symbol_increment(g, line);
-		if (!check_cty(g->map, line))
-			return (free(line), exit(EXIT_SUCCESS), 0);
-		if (!check_border(g->map, line, row))
-			return (free(line), ft_printf("Error\nMap is not valid.\n"), 0);
+		if (!check_cty(g, line))
+			return (parse_error(g, fd, line, "Unknown char in map"));
+		if (!check_border(g, fd, line, row))
+			return (parse_error(g, fd, line, "Map is not closed by walls"));
 		get_player_init_pos(g, line, row);
 		free(line);
 		line = get_next_line(fd);
@@ -87,5 +86,9 @@ void	treatment_map(t_game *g)
 	fd = open(g->map->path, O_RDONLY);
 	line = get_next_line(fd);
 	row = 0;
-	map_parsing(g, fd, line, row);
+	if (!map_parsing(g, fd, line, row))
+	{
+		destroy_game(g);
+		exit(EXIT_FAILURE);
+	}
 }

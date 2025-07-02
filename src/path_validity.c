@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_validity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:00:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/02 04:14:14 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/02 11:14:10 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ static void	fill(char **grid, t_map *map, int y, int x)
 		return ;
 	if (grid[y][x] == '1' || grid[y][x] == 'V' || grid[y][x] == 'F')
 		return ;
+	if (grid[y][x] == 'E')
+	{
+		grid[y][x] = 'F';
+		return ;
+	}
 	grid[y][x] = 'F';
 	fill(grid, map, y - 1, x);
 	fill(grid, map, y + 1, x);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_controls.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 20:36:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/01 12:45:29 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/02 09:23:49 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ void	move_player(t_game *g, int new_x, int new_y, int tex)
 int	handle_keypress(int keycode, t_game *g)
 {
 	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_window(g->mlx, g->win);
-		exit(0);
-	}
+		close_window(g);
 	if (keycode == W || keycode == UP_ARROW)
 		move_player(g, g->px, g->py - 1, TEX_PLAYER_BACK);
 	else if (keycode == S || keycode == DOWN_ARROW)

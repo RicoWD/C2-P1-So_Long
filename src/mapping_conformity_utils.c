@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapping_conformity_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/01 05:56:15 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/02 14:45:30 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,34 +48,28 @@ void	are_symbols_valid(t_map *map)
 			exit(EXIT_SUCCESS), (void)0);
 }
 
-int	check_border(t_map *map, char *line, int row)
+int	check_border(t_game *g, int fd, char *line, int row)
 {
 	int	col;
 
 	col = 0;
-	while (col < map->width)
+	while (col < g->map->width)
 	{
-		if (row == 0 || row == map->height - 1)
+		if (row == 0 || row == g->map->height - 1)
 		{
 			if (line[col] != '1')
-			{
-				ft_printf("Error\nChar '%c' is not a '1' (wall)\n", line[col]);
-				return (0);
-			}
+				return (parse_error(g, fd, line, "Error\nMap not closed"), 0);
 		}
-		else
+		else if (col == 0 || col == g->map->width - 1)
 		{
-			if (col == 0 || col == map->width - 1)
-			{
-				if (line[col] != '1')
-					return (ft_printf("Error\nChar '%c' is not a '1' (wall)\n",
-							line[col]), (0));
-			}
+			if (line[col] != '1')
+				return (parse_error(g, fd, line, "Error\nMap not closed"), 0);
 		}
 		col++;
 	}
 	return (1);
 }
+
 
 int	count_height(t_map *map)
 {

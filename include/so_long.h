@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/02 04:27:49 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/02 14:48:51 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int		grid_load(t_map *map);
 int		close_window(t_game *g);
 void	textures_init(t_game *g);
 int		is_path_solvable(t_game *g);
-int		check_border(t_map *map, char *line, int row);
+int		check_border(t_game *g, int fd, char *line, int row);
 void	draw_bg(t_game *g, t_tex id);
 void	draw_map(t_game *g, char *line, int y);
 void	draw_collect(t_game *g, char *line, int y);
@@ -161,6 +161,7 @@ void	draw_map_per_pxl(t_game *g, char *row, int *x, int y);
 void	destroy_level(t_game *g);
 void	destroy_game(t_game *g);
 void	grid_free(char **grid);
-
+int		parse_error(t_game *g, int fd, char *line, const char *msg);
+int		border_error(char *line, int col);
 
 #endif
