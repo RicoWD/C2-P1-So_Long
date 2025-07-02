@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:43:47 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/07/02 14:50:57 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/02 19:33:00 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ int	border_error(char *line, int col)
 	if (line)
 		free(line);
 	return (0);
+}
+
+void	error_exit(t_game *g, char *msg)
+{
+	if (msg)
+		ft_printf("Error\n%s\n", msg);
+	destroy_game(g);
+	exit(EXIT_FAILURE);
 }
 
 int	parse_error(t_game *g, int fd, char *line, const char *msg)

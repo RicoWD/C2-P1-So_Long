@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/02 14:48:51 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/02 19:32:33 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ typedef struct s_game
 	void	*win;
 	int		win_w;
 	int		win_h;
+	int		screen_w;
+	int		screen_h;
 	int		tile;
 	void	*tex[NB_TEX];
 	int		cur_lvl;
@@ -163,5 +165,6 @@ void	destroy_game(t_game *g);
 void	grid_free(char **grid);
 int		parse_error(t_game *g, int fd, char *line, const char *msg);
 int		border_error(char *line, int col);
+void	error_exit(t_game *g, char *msg);
 
 #endif
