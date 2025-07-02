@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/02 03:42:46 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/02 04:27:49 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int		window_setup(t_game *g);
 void	get_player_init_pos(t_game *g, char *line, int y);
 void	map_displayer(t_game *g, int x, int y, t_tex id);
 int		handle_keypress(int keycode, t_game *g);
-void	grid_load(t_map *map);
+int		grid_load(t_map *map);
 int		close_window(t_game *g);
 void	textures_init(t_game *g);
 int		is_path_solvable(t_game *g);
@@ -160,7 +160,7 @@ void	num_to_xpm(t_game *g, int nb, int x, int y);
 void	draw_map_per_pxl(t_game *g, char *row, int *x, int y);
 void	destroy_level(t_game *g);
 void	destroy_game(t_game *g);
-void	grid_free(char **grid, int h);
+void	grid_free(char **grid);
 
 
 #endif

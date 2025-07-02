@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:44:37 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/01 05:52:22 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/02 04:08:20 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	load_map(t_game *g)
 		draw_collect(g, line, row);
 		draw_player(g, line, row);
 		get_player_init_pos(g, line, row);
+		free(line);
 		line = get_next_line(fd);
 		row++;
 	}

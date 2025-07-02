@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:43:47 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/07/01 12:52:40 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/02 04:34:00 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,23 @@ void	destroy_level(t_game *g)
 	}
 }
 
-void	destroy_game(t_game *g)
+void    destroy_game(t_game *g)
 {
-	int	i;
+    int i;
 
-	if (g->win)
-		mlx_destroy_window(g->mlx, g->win);
-	i = 0;
-	while (i < NB_TEX)
-	{
-		if (g->tex[i])
-			mlx_destroy_image(g->mlx, g->tex[i]);
-		i++;
-	}
-	if (g->map && g->map->grid)
-		grid_free(g->map->grid, g->map->height);
-	if (g->mlx)
-	{
-		mlx_destroy_display(g->mlx);
-		free(g->mlx);
-	}
+    i = 0;
+    while (i < NB_TEX)
+    {
+        if (g->tex[i])
+            mlx_destroy_image(g->mlx, g->tex[i]);
+        i++;
+    }
+    if (g->win)
+        mlx_destroy_window(g->mlx, g->win);
+    if (g->map && g->map->grid)
+        grid_free(g->map->grid);
+    mlx_destroy_display(g->mlx);
+    free(g->mlx);
 }
 
 int	close_window(t_game *g)

@@ -6,20 +6,20 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:00:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/01 05:56:52 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/02 04:14:14 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	grid_free(char **grid, int h)
+void	grid_free(char **grid)
 {
 	int	i;
 
 	if (!grid)
 		return ;
 	i = 0;
-	while (i < h)
+	while (grid[i])
 	{
 		free(grid[i]);
 		i++;
@@ -40,7 +40,7 @@ char	**grid_dup(char **src, int h)
 	{
 		dst[i] = ft_strdup(src[i]);
 		if (!dst[i])
-			return (grid_free(dst, i), (NULL));
+			return (grid_free(dst), (NULL));
 		i++;
 	}
 	dst[i] = NULL;
@@ -77,11 +77,11 @@ int	is_path_solvable(t_game *g)
 		while (x < g->map->width)
 		{
 			if (tmp[y][x] == 'C' || tmp[y][x] == 'E')
-				return (grid_free(tmp, g->map->height), 0);
+				return (grid_free(tmp), 0);
 			x++;
 		}
 		y++;
 	}
-	grid_free(tmp, g->map->height);
+	grid_free(tmp);
 	return (1);
 }
