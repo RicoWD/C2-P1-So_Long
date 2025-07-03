@@ -6,11 +6,32 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:00:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/02 11:14:10 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:43:49 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	free_all(t_game *g)
+{
+	if (!g)
+		return ;
+	if (g->map && g->map->grid)
+		grid_free(g->map->grid);
+}
+
+void	grid_free_n(char **grid, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		free(grid[i]);
+		i++;
+	}
+	free(grid);
+}
 
 void	grid_free(char **grid)
 {
@@ -40,7 +61,10 @@ char	**grid_dup(char **src, int h)
 	{
 		dst[i] = ft_strdup(src[i]);
 		if (!dst[i])
-			return (grid_free(dst), (NULL));
+		{
+			grid_free_n(dst, i);
+			return (NULL);
+		}
 		i++;
 	}
 	dst[i] = NULL;
@@ -82,7 +106,7 @@ int	is_path_solvable(t_game *g)
 		while (x < g->map->width)
 		{
 			if (tmp[y][x] == 'C' || tmp[y][x] == 'E')
-				return (grid_free(tmp), 0);
+				return (free_all(g), grid_free(tmp), 0);
 			x++;
 		}
 		y++;

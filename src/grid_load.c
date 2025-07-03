@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grid_load.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/02 04:25:52 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/03 14:43:43 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,42 +31,42 @@ char	*line_ndup(char *line, int width)
 	dst[i] = '\0';
 	return (dst);
 }
-char    **grid_alloc(int h)
+char	**grid_alloc(int h)
 {
-    char    **g;
+	char	**g;
 
     g = malloc(sizeof(char *) * (h + 1));
-    if (!g)
-        return (NULL);
+	if (!g)
+		return (NULL);
     g[h] = NULL;
-    return (g);
+	return (g);
 }
 
 int grid_load(t_map *m)
 {
-    int     fd;
-    char    *line;
-    int     row;
+	int		fd;
+	char	*line;
+	int		row;
 
-    if (m->grid)
-        grid_free(m->grid);
+	if (m->grid)
+		grid_free(m->grid);
 
     fd = open(m->path, O_RDONLY);
-    if (fd < 0)
-        return (perror("open"), 1);
-
+	if (fd < 0)
+		return (close(fd), 1);
     m->grid = grid_alloc(m->height);
-    if (!m->grid)
-        return (close(fd), 1);
-
+	if (!m->grid)
+		return (close(fd), 1);
     row = 0;
-    while ((line = get_next_line(fd)))
-    {
+	line = get_next_line(fd);
+	while (line)
+	{
         m->grid[row] = line_ndup(line, m->width);
-        free(line);
-        if (!m->grid[row++])
-            return (close(fd), 1);
-    }
-    close(fd);
-    return (0);
+		free(line);
+		if (!m->grid[row++])
+			return (close(fd), 1);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (0);
 }

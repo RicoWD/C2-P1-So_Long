@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:56:00 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/02 17:12:26 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:18:38 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	is_allowed(char c)
 		|| c == 'P' || c == 'V');
 }
 
-int	check_cty(t_game *g, char *line)
+int	check_cty(t_game *g, int fd, char *line)
 {
 	int	col;
 
@@ -26,8 +26,7 @@ int	check_cty(t_game *g, char *line)
 	while (col < g->map->width)
 	{
 		if (!is_allowed(line[col]))
-			return (ft_printf("Error\nchar '%c' is not valid.\n",
-					line[col]), close_window(g), 0);
+			return (parse_error(g, fd, line, "Unknown char in map"), 0);
 		col++;
 	}
 	return (1);
@@ -55,7 +54,7 @@ int	map_parsing(t_game *g, int fd, char *line, int row)
 		else if (len != g->map->width)
 			return (parse_error(g, fd, line, "Map is not rectangular"));
 		symbol_increment(g, line);
-		if (!check_cty(g, line))
+		if (!check_cty(g, fd, line))
 			return (parse_error(g, fd, line, "Unknown char in map"));
 		if (!check_border(g, fd, line, row))
 			return (parse_error(g, fd, line, "Map is not closed by walls"));
@@ -81,7 +80,7 @@ void	treatment_map(t_game *g)
 	g->map->count_c = 0;
 	g->map->width = -1;
 	g->map->height = 0;
-	if (!count_height(g->map))
+	if (!count_height(g))
 		return ;
 	fd = open(g->map->path, O_RDONLY);
 	line = get_next_line(fd);

@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 00:28:19 by ep                #+#    #+#             */
-/*   Updated: 2025/07/02 18:01:43 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:33:11 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	choose_tile(t_game *g)
 		g->tile = TILE;
 	if (g->tile < TILE_MIN)
 		return (1);
-	g->win_w = ref_w;
-	g->win_h = ref_h;
+	g->win_w = ref_w * g->tile;
+	g->win_h = ref_h * g->tile;
 	return (0);
 }
 
@@ -90,20 +90,14 @@ void	load_tex(t_game *g, int id, const char *file)
 {
 	g->tex[id] = scale_xpm(g->mlx, file, g->tile);
 	if (!g->tex[id])
-	{
-		ft_printf("Error\ntexture: %s\n", file);
-		exit(EXIT_FAILURE);
-	}
+		error_exit(g, "Textures fails");
 }
 
 int	window_setup(t_game *g)
 {
 	g->mlx = mlx_init();
 	if (!g->mlx || choose_tile(g))
-	if (!g->mlx)
 		return (1);
-	g->win_h = g->win_h * TILE;
-	g->win_w = g->win_w * TILE;
 	ft_printf("screen W = | %d | || win W | %d |\n", g->screen_w, g->win_w);
 	ft_printf("screen H = | %d | || win H | %d |\n", g->screen_h, g->win_h);
 	if (g->win_h > g->screen_h || g->win_w > g->screen_w)
@@ -115,8 +109,7 @@ int	window_setup(t_game *g)
 	g->win = mlx_new_window(g->mlx,
 			g->win_w,
 			g->win_h,
-			// g->win_w * g->tile,
-			// g->win_h * g->tile,
+
 			"so_long");
 	return (!g->win);
 }

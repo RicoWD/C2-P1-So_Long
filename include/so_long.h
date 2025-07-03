@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/02 19:32:33 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:18:32 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	print_map(const char *path);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		handle_keypress(int keycode, t_game *g);
 void	treatment_map(t_game *g);
-int		count_height(t_map *map);
+int		count_height(t_game *g);
 void	load_ath(t_game *g);
 void	load_map(t_game *g);
 void	load_tex(t_game *g, int id, const char *file);

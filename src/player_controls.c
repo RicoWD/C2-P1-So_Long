@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 20:36:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/02 09:23:49 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:06:16 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	level_reset(t_game *g)
 	load_map(g);
 	load_ath(g);
 }
-
-
 
 static void	update_player_pos(t_game *g, int new_x, int new_y, int tex)
 {

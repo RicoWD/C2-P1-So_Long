@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:43:47 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/07/02 19:33:00 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 13:46:09 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,15 @@ void	destroy_game(t_game *g)
 	int	i;
 
 	i = 0;
+	if (!g || !g->mlx)
+		return ;
 	while (i < NB_TEX)
 	{
 		if (g->tex[i])
+		{
 			mlx_destroy_image(g->mlx, g->tex[i]);
+			g->tex[i] = NULL;
+		}
 		i++;
 	}
 	if (g->win)

@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/02 14:45:30 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:52:09 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,19 @@ int	check_border(t_game *g, int fd, char *line, int row)
 }
 
 
-int	count_height(t_map *map)
+int	count_height(t_game *g)
 {
 	int		fd;
 	char	*line;
 
-	fd = open(map->path, O_RDONLY);
+	fd = open(g->map->path, O_RDONLY);
 	if (fd < 0)
-		return (perror("open"), 0);
-	map->height = 0;
+		return (error_exit(g, "Issue with file descriptor"), 0);
+	g->map->height = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		map->height++;
+		g->map->height++;
 		free(line);
 		line = get_next_line(fd);
 	}

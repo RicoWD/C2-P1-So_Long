@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_load.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:44:37 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/02 04:08:20 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/03 15:49:20 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ void	load_map(t_game *g)
 
 	fd = open(g->map->path, O_RDONLY);
 	if (fd < 0)
-		return (perror("open"));
+		return ((void)close(fd), (void)get_next_line(fd));
 	line = get_next_line(fd);
 	if (!line)
-		return (perror("open"));
+		return ((void)close(fd), (void)get_next_line(fd), free(line),
+			error_exit(g, "Line not found"));
 	row = 0;
 	while (line)
 	{

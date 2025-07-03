@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ath_load.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:18:20 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/07/01 08:28:29 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/07/03 15:13:48 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,10 @@ static char	*ath_padded_line(t_game *g)
 
 	fd = open(g->ath_path, O_RDONLY);
 	if (fd < 0)
-		return (NULL);
+		return (close(fd), NULL);
 	raw = get_next_line(fd);
 	if (!raw)
-	{
-		close(fd);
-		return (NULL);
-	}
+		return (close(fd), NULL);
 	len = get_raw_len(raw);
 	padded = malloc(g->win_w + 1);
 	if (!padded)
@@ -87,7 +84,7 @@ void	load_ath(t_game *g)
 
 	line = ath_padded_line(g);
 	if (!line)
-		return ((void)perror("ATH"));
+		return (free(line), error_exit(g, "Issue with ATH loading"));
 	draw_ath(g, line);
 	free(line);
 }
