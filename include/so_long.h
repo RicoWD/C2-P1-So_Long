@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/03 15:18:32 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 20:48:30 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int		handle_keypress(int keycode, t_game *g);
 int		grid_load(t_map *map);
 int		close_window(t_game *g);
 void	textures_init(t_game *g);
-int		is_path_solvable(t_game *g);
+int		is_path_not_solvable(t_game *g);
 int		check_border(t_game *g, int fd, char *line, int row);
 void	draw_bg(t_game *g, t_tex id);
 void	draw_map(t_game *g, char *line, int y);
@@ -166,5 +166,6 @@ void	grid_free(char **grid);
 int		parse_error(t_game *g, int fd, char *line, const char *msg);
 int		border_error(char *line, int col);
 void	error_exit(t_game *g, char *msg);
+void	free_all(t_game *g);
 
 #endif

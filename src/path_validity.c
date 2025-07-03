@@ -6,19 +6,11 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:00:27 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/03 17:43:49 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 20:43:28 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-static void	free_all(t_game *g)
-{
-	if (!g)
-		return ;
-	if (g->map && g->map->grid)
-		grid_free(g->map->grid);
-}
 
 void	grid_free_n(char **grid, int n)
 {
@@ -89,7 +81,7 @@ static void	fill(char **grid, t_map *map, int y, int x)
 	fill(grid, map, y, x + 1);
 }
 
-int	is_path_solvable(t_game *g)
+int	is_path_not_solvable(t_game *g)
 {
 	char	**tmp;
 	int		y;

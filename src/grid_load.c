@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/03 14:43:43 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 20:50:45 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,19 @@ char	*line_ndup(char *line, int width)
 	dst[i] = '\0';
 	return (dst);
 }
+
 char	**grid_alloc(int h)
 {
 	char	**g;
 
-    g = malloc(sizeof(char *) * (h + 1));
+	g = malloc(sizeof(char *) * (h + 1));
 	if (!g)
 		return (NULL);
-    g[h] = NULL;
+	g[h] = NULL;
 	return (g);
 }
 
-int grid_load(t_map *m)
+int	grid_load(t_map *m)
 {
 	int		fd;
 	char	*line;
@@ -50,18 +51,17 @@ int grid_load(t_map *m)
 
 	if (m->grid)
 		grid_free(m->grid);
-
-    fd = open(m->path, O_RDONLY);
+	fd = open(m->path, O_RDONLY);
 	if (fd < 0)
 		return (close(fd), 1);
-    m->grid = grid_alloc(m->height);
+	m->grid = grid_alloc(m->height);
 	if (!m->grid)
 		return (close(fd), 1);
-    row = 0;
+	row = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-        m->grid[row] = line_ndup(line, m->width);
+		m->grid[row] = line_ndup(line, m->width);
 		free(line);
 		if (!m->grid[row++])
 			return (close(fd), 1);

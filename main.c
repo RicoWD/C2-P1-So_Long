@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/03 12:01:15 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 20:43:04 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	game_launch_checks(t_game *g, char *path)
 	treatment_map(g);
 	if (grid_load(g->map))
 		error_exit(g, "Grid load failed");
-	if (!is_path_solvable(g))
+	if (!is_path_not_solvable(g))
 		error_exit(g, "Map not solvable");
 	g->ath_cols = get_ath_cols(g->ath_path);
 	if (window_setup(g))

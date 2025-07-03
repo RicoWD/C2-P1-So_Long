@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 00:28:19 by ep                #+#    #+#             */
-/*   Updated: 2025/07/03 17:33:11 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 20:42:40 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ int	window_setup(t_game *g)
 	g->win = mlx_new_window(g->mlx,
 			g->win_w,
 			g->win_h,
-
 			"so_long");
 	return (!g->win);
 }

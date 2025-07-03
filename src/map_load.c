@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:44:37 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/03 15:49:20 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 20:48:01 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ void	*load_xpm(void *mlx, const char *path)
 	return (img);
 }
 
+void	draw_line(t_game *g, char *line, int row)
+{
+	draw_map(g, line, row);
+	draw_collect(g, line, row);
+	draw_player(g, line, row);
+}
+
 void	load_map(t_game *g)
 {
 	int		fd;
@@ -53,9 +60,7 @@ void	load_map(t_game *g)
 		len = ft_strlen(line) - (line[ft_strlen(line) - 1] == '\n');
 		if (g->map->width == -1)
 			g->map->width = len;
-		draw_map(g, line, row);
-		draw_collect(g, line, row);
-		draw_player(g, line, row);
+		draw_line(g, line, row);
 		get_player_init_pos(g, line, row);
 		free(line);
 		line = get_next_line(fd);

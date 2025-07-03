@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/03 15:52:09 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 20:39:53 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	check_border(t_game *g, int fd, char *line, int row)
 	}
 	return (1);
 }
-
 
 int	count_height(t_game *g)
 {
