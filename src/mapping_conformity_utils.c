@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:59 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/03 20:39:53 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/03 20:59:37 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ int	check_border(t_game *g, int fd, char *line, int row)
 		if (row == 0 || row == g->map->height - 1)
 		{
 			if (line[col] != '1')
-				return (parse_error(g, fd, line, "Error\nMap not closed"), 0);
+				return (parse_error(g, fd, line, "Map not closed"), 0);
 		}
 		else if (col == 0 || col == g->map->width - 1)
 		{
 			if (line[col] != '1')
-				return (parse_error(g, fd, line, "Error\nMap not closed"), 0);
+				return (parse_error(g, fd, line, "Map not closed"), 0);
 		}
 		col++;
 	}
