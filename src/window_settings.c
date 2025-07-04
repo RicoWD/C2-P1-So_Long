@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 00:28:19 by ep                #+#    #+#             */
-/*   Updated: 2025/07/03 20:42:40 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 15:58:55 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,9 @@
 
 static int	choose_tile(t_game *g)
 {
-	int	ref_w;
-	int	ref_h;
-	int	tile_w;
-
-	mlx_get_screen_size(g->mlx, &g->screen_w, &g->screen_h);
-	ref_w = g->map->width;
-	if (g->ath_cols + 2 > ref_w)
-		ref_w = g->ath_cols + 2;
-	ref_h = g->map->height + ATH_ROWS;
-	tile_w = g->screen_w / ref_w;
-	g->tile = g->screen_h / ref_h;
-	if (tile_w < g->tile)
-		g->tile = tile_w;
-	if (g->tile > TILE)
-		g->tile = TILE;
-	if (g->tile < TILE_MIN)
-		return (1);
-	g->win_w = ref_w * g->tile;
-	g->win_h = ref_h * g->tile;
+	g->tile = TILE;
+	g->win_w = g->map->width * g->tile;
+	g->win_h = (g->map->height + ATH_ROWS) * g->tile;
 	return (0);
 }
 
@@ -77,8 +61,10 @@ void	*scale_xpm(void *mlx, const char *file, int tile)
 			&s.line_size_s, &(int){0});
 	s.dst = mlx_get_data_addr(dst_img, &s.bits_per_pxl_d,
 			&s.line_size_d, &(int){0});
-	s.bits_per_pxl_s /= 8;
-	s.bits_per_pxl_d /= 8;
+	if (s.bits_per_pxl_s > 30)
+		s.bits_per_pxl_s /= 8;
+	if (s.bits_per_pxl_d > 30)
+		s.bits_per_pxl_d /= 8;
 	s.ratio_x = (double)w / tile;
 	s.ratio_y = (double)h / tile;
 	copy_scaled(&s, tile);
@@ -98,8 +84,7 @@ int	window_setup(t_game *g)
 	g->mlx = mlx_init();
 	if (!g->mlx || choose_tile(g))
 		return (1);
-	ft_printf("screen W = | %d | || win W | %d |\n", g->screen_w, g->win_w);
-	ft_printf("screen H = | %d | || win H | %d |\n", g->screen_h, g->win_h);
+	mlx_get_screen_size(g->mlx, &g->screen_w, &g->screen_h);
 	if (g->win_h > g->screen_h || g->win_w > g->screen_w)
 	{
 		ft_printf("Error\nMap is larger than screen.\n");
