@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:54:52 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/02 14:54:54 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:09:36 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,3 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (NULL);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-
-int	main(int ac, char **av)
-{
-	if (ac == 4)
-	{
-		printf("strnstr    || %s\n", strnstr(av[1], av[2], ft_atoi(av[3])));
-		printf("ft_strnstr || %s\n", ft_strnstr(av[1], av[2], ft_atoi(av[3])));
-	}
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:54:32 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/02 14:54:34 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:04:25 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	dst[i] = '\0';
 	return (ft_strlen(src));
 }
-
-// #include <stdio.h>
-
-// int	main(int ac, char **av)
-// {
-// 	(void) ac;
-// 	char	dest[100];
-// 	size_t	dstsize;
-
-// 	dstsize = 10;
-// 	printf("%zu\n", ft_strlcpy(dest, av[1], dstsize));
-// 	printf("%s\n", dest);
-// }

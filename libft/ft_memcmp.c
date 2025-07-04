@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:52:47 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/02 14:52:48 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:02:51 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,3 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-
-int	main(int ac, char **av)
-{
-	if (ac == 4)
-	{
-		printf("memcmp    || %d\n", memcmp(av[1], av[2], ft_atoi(av[3])));
-		printf("ft_memcmp || %d\n", ft_memcmp(av[1], av[2], ft_atoi(av[3])));
-	}
-}
-*/

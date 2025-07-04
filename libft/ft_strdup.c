@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:54:04 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/02 14:54:08 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:04:14 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,3 @@ char	*ft_strdup(const char *s1)
 	cpy[i] = '\0';
 	return (cpy);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-
-int	main(int ac, char **av)
-{
-	if (ac == 2)
-	{
-		printf("strdup    || %s\n", strdup(av[1]));
-		printf("ft_strdup || %s\n", ft_strdup(av[1]));
-	}
-}
-*/

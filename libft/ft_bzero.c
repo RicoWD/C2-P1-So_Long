@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:35:14 by erpascua          #+#    #+#             */
-/*   Updated: 2025/04/28 16:40:51 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:02:23 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,3 @@ void	ft_bzero(void *s, size_t n)
 		n--;
 	}
 }
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-	char	str[20];
-	size_t	n;
-
-	n = 10;
-	ft_bzero(str, n);
-	printf("%s\n", str);
-}
-*/

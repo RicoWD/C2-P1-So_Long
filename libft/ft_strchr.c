@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:53:56 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/02 14:53:57 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:04:11 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,3 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)s);
 	return (NULL);
 }
-/*
-#include <stdio.h>
-
-int	main()
-{
-	//if (ac == 3)
-	//{
-		printf("strnchr    || %s\n", ft_strchr("teste", 1024));
-		//printf("strnchr    || %s\n", ft_strchr(av[1], atoi(av[2])));
-		//printf("ft_strnchr || %s\n", ft_strchr(av[1], atoi(av[2])));
-		printf("ft_strnchr || %s\n", ft_strchr("teste", 1024));
-		//}
-	}
-	
-*/

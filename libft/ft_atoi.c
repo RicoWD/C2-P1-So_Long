@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 19:11:48 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/02 10:54:13 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:07:50 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,3 @@ int	ft_atoi(const char *str)
 	}
 	return ((int)(nb * sign));
 }
-/*
-#include <stdio.h>
-#include <stdlib.h>
-
-int	main(int ac, char **av)
-{
-	int	i;
-
-	i = 1;
-	while (i < ac)
-	{
-		printf("ft_atoi %d\n", ft_atoi(av[i]));
-		printf("atoi    %d\n", atoi(av[i]));
-		i++;
-	}
-}
-*/

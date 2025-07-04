@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:36:12 by erpascua          #+#    #+#             */
-/*   Updated: 2025/04/28 16:40:46 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:02:36 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,3 @@ int	ft_isascii(int c)
 		return (1);
 	return (0);
 }
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-	printf("%d\n", ft_isascii('h'));
-	printf("%d\n", ft_isascii('\n'));
-	printf("%d\n", ft_isascii(0));
-}
-*/

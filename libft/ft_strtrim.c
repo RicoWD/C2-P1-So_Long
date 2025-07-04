@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:55:05 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/02 14:55:07 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:05:10 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	r[len] = '\0';
 	return (r);
 }
-/*
-#include <stdio.h>
-
-int	main(int ac, char **av)
-{
-	if (ac == 3)
-	printf("ft_strtrim || %s\n", ft_strtrim(av[1], av[2]));
-}
-*/

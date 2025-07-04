@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:53:47 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/06 10:11:55 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:04:08 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,3 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	return (spliter(s, c, tab));
 }
-/*
-#include <stdio.h>
-
-int	main(int ac, char **av)
-{
-	char	**tab = ft_split(av[1], av[2][0]);
-	
-	if (ac == 3)
-	{
-		while (*tab)
-		printf("%s\n", *tab++);
-	}
-	free(tab);
-}
-*/

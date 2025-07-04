@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 09:55:05 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/02 12:00:04 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:04:39 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	res[i] = '\0';
 	return (res);
 }
-/*
-#include <stdio.h>
-
-int	main(int ac, char **av)
-{
-	if (ac == 3)
-	printf("%s\n", ft_strmapi(av[1], av[2](av[3], av[4][0])));
-}
-*/

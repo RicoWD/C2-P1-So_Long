@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:54:23 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/02 14:54:25 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:04:21 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	dst[len_dst + i] = '\0';
 	return (len_src + len_dst);
 }
-/*
-#include <stdio.h>
-
-int	main(int ac, char **av)
-{
-	if (ac == 4)
-	{
-		printf("strlcat    || %d\n", strlcat(av[1], av[2], atoi(av[3])));
-		printf("ft_strlcat || %zu\n", ft_strlcat(av[1], av[2], atoi(av[3])));
-	}
-}
-*/

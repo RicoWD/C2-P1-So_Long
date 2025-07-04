@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 18:39:12 by erpascua          #+#    #+#             */
-/*   Updated: 2025/04/28 16:40:36 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:03:00 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,3 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-	char	str[20];
-	size_t	count;
-
-	count = 10;
-	ft_memset(str, 'c', count);
-	printf("%s\n", str);
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:52:23 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/02 14:52:27 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:02:45 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,3 @@ char	*ft_itoa(int n)
 	nb[n_len] = '\0';
 	return (nb);
 }
-/*
-#include <stdio.h>
-
-int	main(int ac, char **av)
-{
-	int	i;
-	
-	i = 1;
-	while (i < ac)
-	{
-		printf("%s\n", ft_itoa(ft_atoi(av[i])));
-		i++;
-	}
-}
-*/

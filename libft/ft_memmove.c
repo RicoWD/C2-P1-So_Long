@@ -6,7 +6,7 @@
 /*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:43:49 by erpascua          #+#    #+#             */
-/*   Updated: 2025/05/02 10:48:30 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:02:57 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,3 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-// #include <stdio.h>
-// #include <string.h>
-// int main(int ac, char **av)
-// {
-// 	(void) ac;
-// 	ft_memmove(av[1], &av[1][5], 6);
-// 	printf("ft_memmove\ndest : %s\n", av[1]);
-// 	memmove(av[1], &av[1][5], 6);
-// 	printf("memmove\ndest : %s\n\n\n", av[1]);
-// 	ft_memmove(&av[1][5], av[1], 6);
-// 	printf("ft_memmove\ndest : %s\n", av[1]);
-// 	memmove(&av[1][5], av[1], 6);
-// 	printf("memmove\ndest : %s\n\n", av[1]);
-// }

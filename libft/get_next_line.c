@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ep <ep@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:50:04 by erpascua          #+#    #+#             */
-/*   Updated: 2025/06/17 01:03:21 by ep               ###   ########.fr       */
+/*   Updated: 2025/07/04 16:05:28 by erpascua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,23 +134,3 @@ char	*get_next_line(int fd)
 	stash = clean_stash(stash);
 	return (line);
 }
-/*
-#include <stdio.h>
-#include <fcntl.h>
-
-int	main(int ac, char **av)
-{
-	int		fd;
-	char	*line;
-	
-	(void)ac;
-	fd = open(av[1], O_RDONLY);
-	while ((line = get_next_line(fd)))
-	{
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
-	return (0);
-}
-*/
