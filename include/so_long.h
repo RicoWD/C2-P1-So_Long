@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:09:39 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/03 20:48:30 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 00:46:38 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,24 +111,35 @@ typedef struct s_map
 	int		remaining_c;
 }				t_map;
 
+typedef struct s_vilain
+{
+	int	x;
+	int	y;
+	int	dir;
+	int	axis;
+	int	frame;
+}	t_vilain;
+
 typedef struct s_game
 {
-	t_map	*map;
-	void	*mlx;
-	void	*win;
-	int		win_w;
-	int		win_h;
-	int		screen_w;
-	int		screen_h;
-	int		tile;
-	void	*tex[NB_TEX];
-	int		cur_lvl;
-	int		px;
-	int		py;
-	char	*ath_path;
-	int		ath_cols;
-	int		remaining_p_life;
-	int		moves;
+	t_map		*map;
+	void		*mlx;
+	void		*win;
+	int			win_w;
+	int			win_h;
+	int			screen_w;
+	int			screen_h;
+	int			tile;
+	void		*tex[NB_TEX];
+	int			cur_lvl;
+	int			px;
+	int			py;
+	char		*ath_path;
+	int			ath_cols;
+	int			remaining_p_life;
+	int			moves;
+	t_vilain	s_vilain;
+	int			nb_vilains;
 }				t_game;
 
 void	print_map(const char *path);
@@ -167,5 +178,7 @@ int		parse_error(t_game *g, int fd, char *line, const char *msg);
 int		border_error(char *line, int col);
 void	error_exit(t_game *g, char *msg);
 void	free_all(t_game *g);
+int		update_loop(t_game *g);
+
 
 #endif

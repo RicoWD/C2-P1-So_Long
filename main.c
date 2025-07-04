@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erpascua <erpascua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:51:33 by erpascua          #+#    #+#             */
-/*   Updated: 2025/07/03 20:43:04 by erpascua         ###   ########.fr       */
+/*   Updated: 2025/07/04 00:42:09 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	game_launch_checks(t_game *g, char *path)
 		error_exit(g, "MLX init failed");
 	textures_init(g);
 	load_map(g);
+	if (grid_load(g->map))
+	error_exit(g, "Grid load failed");
 	load_ath(g);
+	mlx_loop_hook(g->mlx, update_loop, g);
 	mlx_key_hook(g->win, handle_keypress, g);
 	mlx_hook(g->win, 17, 0, close_window, g);
 	mlx_loop(g->mlx);
